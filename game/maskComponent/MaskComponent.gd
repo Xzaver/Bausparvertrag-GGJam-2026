@@ -19,13 +19,12 @@ enum EMOTIONS {
 @export var emotions:EMOTIONS
 
 @export var colorizeableMeshes :Array[MeshInstance3D] = []
+	
+static func GetRandomEmotion() -> int:
+	var values = MaskComponent.EMOTIONS.values()
+	return values[randi() % values.size()] as MaskComponent.EMOTIONS
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	
+static func GetRandomSlot() -> int:
+	var values = MaskComponent.SLOT.values()
+	return values[randi() % values.size()] as MaskComponent.SLOT

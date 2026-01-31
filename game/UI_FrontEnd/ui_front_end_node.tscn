@@ -2,12 +2,17 @@
 
 [ext_resource type="Script" uid="uid://c15dkh36dwis3" path="res://game/UI_FrontEnd/ui_frontend_manager.gd" id="1_s0feo"]
 [ext_resource type="Script" uid="uid://brigfxxspm5r" path="res://game/UI_FrontEnd/custom_button_1.gd" id="2_h7x47"]
+[ext_resource type="BoxMesh" uid="uid://dfyxh7aymac5y" path="res://game/UI_FrontEnd/new_box_mesh.tres" id="2_s83qi"]
 [ext_resource type="Script" uid="uid://duuirnwyn4rj2" path="res://game/UI_FrontEnd/hover_light.gd" id="2_y2ony"]
 [ext_resource type="SphereMesh" uid="uid://784fvu0wgu28" path="res://game/UI_FrontEnd/new_sphere_mesh.tres" id="4_h7x47"]
 
 [sub_resource type="Environment" id="Environment_y2ony"]
 
-[node name="UI_FrontEnd_Node" type="Control" unique_id=1647626456 node_paths=PackedStringArray("color_picker", "next_button", "shape_buttons")]
+[sub_resource type="BoxMesh" id="BoxMesh_s83qi"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nbwjk"]
+
+[node name="UI_FrontEnd_Node" type="Control" unique_id=1647626456 node_paths=PackedStringArray("debug_apply_all_button", "color_picker", "next_button", "shape_buttons", "debug_mesh_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,9 +20,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s0feo")
-color_picker = NodePath("Footer_Container/Left/ColorPickerButton")
+debug_mesh_resource = ExtResource("2_s83qi")
+debug_apply_all_button = NodePath("Footer_Container/DEBUG")
+color_picker = NodePath("Footer_Container/Left/MarginContainer/ColorPickerButton")
 next_button = NodePath("Footer_Container/Right/NextStep")
-shape_buttons = [NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape1"), NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2")]
+shape_buttons = [NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape1"), NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2"), NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape3"), NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape4")]
+debug_mesh_container = NodePath("Node3D/MeshContainer")
 
 [node name="Header" type="MarginContainer" parent="." unique_id=594615917]
 layout_mode = 0
@@ -31,6 +39,14 @@ layout_mode = 2
 layout_mode = 2
 text = "test"
 
+[node name="ScrollLeft2" type="Button" parent="Header/HFlowContainer" unique_id=1622574233]
+visible = false
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "<"
+
 [node name="Footer_Container" type="MarginContainer" parent="." unique_id=284973261]
 layout_mode = 1
 anchors_preset = 15
@@ -38,6 +54,32 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Node3D" type="Node3D" parent="Footer_Container" unique_id=1208128868]
+visible = false
+script = ExtResource("2_y2ony")
+
+[node name="Camera3D" type="Camera3D" parent="Footer_Container/Node3D" unique_id=1546807400]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Footer_Container/Node3D" unique_id=187592722]
+environment = SubResource("Environment_y2ony")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Footer_Container/Node3D" unique_id=336827190]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6459079, 9.802751, 1.3474886)
+visible = false
+light_color = Color(0.22446853, 0.99999994, 0.97581047, 1)
+light_energy = 0.0
+omni_range = 2.889
+
+[node name="MeshContainer" type="Node3D" parent="Footer_Container/Node3D" unique_id=233804635]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 1, 2.8029575, 10, -2.4745598)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Footer_Container/Node3D/MeshContainer" unique_id=1241253520]
+mesh = SubResource("BoxMesh_s83qi")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Footer_Container/Node3D" unique_id=1027568848]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.457678, 0.9126296)
+visible = false
 
 [node name="Left" type="HBoxContainer" parent="Footer_Container" unique_id=1501318371]
 layout_mode = 2
@@ -52,9 +94,22 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Color"
 
-[node name="ColorPickerButton" type="ColorPickerButton" parent="Footer_Container/Left" unique_id=1982431631]
-custom_minimum_size = Vector2(125, 125)
+[node name="MarginContainer" type="MarginContainer" parent="Footer_Container/Left" unique_id=793515502]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Footer_Container/Left/MarginContainer" unique_id=1982431631]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Footer_Container/Left/MarginContainer" unique_id=1355693351]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Color Picker"
+horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="Footer_mid" type="HBoxContainer" parent="Footer_Container" unique_id=1745171238]
 layout_mode = 2
@@ -104,11 +159,13 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="SubViewport" type="SubViewport" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape1/SubViewportContainer" unique_id=268830215]
+own_world_3d = true
 handle_input_locally = false
 size = Vector2i(125, 125)
 render_target_update_mode = 4
 
 [node name="Node3D" type="Node3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape1/SubViewportContainer/SubViewport" unique_id=1206232906]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 script = ExtResource("2_y2ony")
 
 [node name="Camera3D" type="Camera3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape1/SubViewportContainer/SubViewport/Node3D" unique_id=296809216]
@@ -125,13 +182,17 @@ omni_range = 2.889
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape1/SubViewportContainer/SubViewport/Node3D/MeshContainer" unique_id=616102387]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8543887, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6698841)
 mesh = ExtResource("4_h7x47")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape1/SubViewportContainer/SubViewport/Node3D/MeshContainer" unique_id=1855977948]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6698841)
 mesh = ExtResource("4_h7x47")
 
-[node name="Button_Shape2" type="Button" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer" unique_id=1470730042 node_paths=PackedStringArray("mesh_container")]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape1/SubViewportContainer/SubViewport/Node3D" unique_id=1917505156]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8369818, 6.3441634)
+
+[node name="Button_Shape2" type="Button" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer" unique_id=1121182906 node_paths=PackedStringArray("mesh_container")]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -140,7 +201,7 @@ text = "Shape1"
 script = ExtResource("2_h7x47")
 mesh_container = NodePath("SubViewportContainer/SubViewport/Node3D/MeshContainer")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2" unique_id=2001364654]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2" unique_id=1458851640]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -155,33 +216,155 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="SubViewport" type="SubViewport" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer" unique_id=1347991393]
+[node name="SubViewport" type="SubViewport" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer" unique_id=2123652647]
+own_world_3d = true
 handle_input_locally = false
 size = Vector2i(125, 125)
 render_target_update_mode = 4
 
-[node name="Node3D" type="Node3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport" unique_id=2070364543]
+[node name="Node3D" type="Node3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport" unique_id=975368529]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 script = ExtResource("2_y2ony")
 
-[node name="Camera3D" type="Camera3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport/Node3D" unique_id=920580280]
+[node name="Camera3D" type="Camera3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport/Node3D" unique_id=1015294101]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport/Node3D" unique_id=1953459401]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport/Node3D" unique_id=1514724661]
 environment = SubResource("Environment_y2ony")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport/Node3D" unique_id=2022745324]
+[node name="OmniLight3D" type="OmniLight3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport/Node3D" unique_id=482407808]
 light_color = Color(0.22446853, 0.99999994, 0.97581047, 1)
 light_energy = 0.0
 omni_range = 2.889
 
-[node name="MeshContainer" type="Node3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport/Node3D" unique_id=445425083]
+[node name="MeshContainer" type="Node3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport/Node3D" unique_id=551982180]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport/Node3D/MeshContainer" unique_id=1803677569]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8543887, 0)
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport/Node3D/MeshContainer" unique_id=1710192152]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6698841)
 mesh = ExtResource("4_h7x47")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport/Node3D/MeshContainer" unique_id=440177502]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport/Node3D/MeshContainer" unique_id=392820197]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6698841)
 mesh = ExtResource("4_h7x47")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport/Node3D" unique_id=2131969822]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8369818, 6.3441634)
+
+[node name="Button_Shape3" type="Button" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer" unique_id=1534266211 node_paths=PackedStringArray("mesh_container")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Shape1"
+script = ExtResource("2_h7x47")
+mesh_container = NodePath("SubViewportContainer/SubViewport/Node3D/MeshContainer")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape3" unique_id=1859089391]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.5
+offset_top = -62.5
+offset_right = 62.5
+offset_bottom = 62.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape3/SubViewportContainer" unique_id=1698600254]
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(125, 125)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape3/SubViewportContainer/SubViewport" unique_id=718630080]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+script = ExtResource("2_y2ony")
+
+[node name="Camera3D" type="Camera3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape3/SubViewportContainer/SubViewport/Node3D" unique_id=518900949]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape3/SubViewportContainer/SubViewport/Node3D" unique_id=333869046]
+environment = SubResource("Environment_y2ony")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape3/SubViewportContainer/SubViewport/Node3D" unique_id=1632976551]
+light_color = Color(0.22446853, 0.99999994, 0.97581047, 1)
+light_energy = 0.0
+omni_range = 2.889
+
+[node name="MeshContainer" type="Node3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape3/SubViewportContainer/SubViewport/Node3D" unique_id=1779456501]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape3/SubViewportContainer/SubViewport/Node3D/MeshContainer" unique_id=2069476370]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6698841)
+mesh = ExtResource("4_h7x47")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape3/SubViewportContainer/SubViewport/Node3D/MeshContainer" unique_id=1201060530]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6698841)
+mesh = ExtResource("4_h7x47")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape3/SubViewportContainer/SubViewport/Node3D" unique_id=1703130350]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8369818, 6.3441634)
+
+[node name="Button_Shape4" type="Button" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer" unique_id=1726439984 node_paths=PackedStringArray("mesh_container")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Shape1"
+script = ExtResource("2_h7x47")
+mesh_container = NodePath("SubViewportContainer/SubViewport/Node3D/MeshContainer")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape4" unique_id=190456303]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.5
+offset_top = -62.5
+offset_right = 62.5
+offset_bottom = 62.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape4/SubViewportContainer" unique_id=590785205]
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(125, 125)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape4/SubViewportContainer/SubViewport" unique_id=300287521]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+script = ExtResource("2_y2ony")
+
+[node name="Camera3D" type="Camera3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape4/SubViewportContainer/SubViewport/Node3D" unique_id=1927035860]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape4/SubViewportContainer/SubViewport/Node3D" unique_id=1258388071]
+environment = SubResource("Environment_y2ony")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape4/SubViewportContainer/SubViewport/Node3D" unique_id=1429582453]
+light_color = Color(0.22446853, 0.99999994, 0.97581047, 1)
+light_energy = 0.0
+omni_range = 2.889
+
+[node name="MeshContainer" type="Node3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape4/SubViewportContainer/SubViewport/Node3D" unique_id=217657454]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape4/SubViewportContainer/SubViewport/Node3D/MeshContainer" unique_id=653151268]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6698841)
+mesh = ExtResource("4_h7x47")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape4/SubViewportContainer/SubViewport/Node3D/MeshContainer" unique_id=2036226145]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6698841)
+mesh = ExtResource("4_h7x47")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape4/SubViewportContainer/SubViewport/Node3D" unique_id=1464903023]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8369818, 6.3441634)
 
 [node name="ScrollRight" type="Button" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer" unique_id=243392702]
 visible = false
@@ -202,3 +385,30 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = ">>"
+
+[node name="DEBUG" type="Button" parent="Footer_Container" unique_id=1296362463]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "DEBUG"
+
+[node name="Node3D" type="Node3D" parent="." unique_id=226628662]
+script = ExtResource("2_y2ony")
+
+[node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=1749789434]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D" unique_id=1953639537]
+environment = SubResource("Environment_y2ony")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D" unique_id=198268080]
+light_color = Color(0.22446853, 0.99999994, 0.97581047, 1)
+light_energy = 0.0
+omni_range = 2.889
+
+[node name="MeshContainer" type="Node3D" parent="Node3D" unique_id=632318404]
+transform = Transform3D(1, 0, 0, 0, 0.7677582, 0.6407397, 0, -0.6407397, 0.7677582, 0, 0, -5.2321515)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D/MeshContainer" unique_id=384707235]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6698841)
+mesh = SubResource("CylinderMesh_nbwjk")
