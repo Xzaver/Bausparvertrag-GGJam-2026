@@ -7,18 +7,27 @@ Minimal UI click handler using a button list.
 # Exported UI References
 # ==================================================
 
-@export var buttons: Array[Button]
-"""Clickable buttons (order = index)."""
 
-var button_mesh_references: Array[MeshInstance3D] = []
-"""Meshes collected from buttons at runtime."""
+signal shape_selected(index: int)
+signal next_requested
 
-#@export var button_mesh_references: Array[MeshInstance3D]
-"""Mesh previews corresponding to buttons (same index)."""
+const DEBUG_SIGNALS := true
 
-#@export var default_meshs: Array[MeshInstance3D]
-"""Mesh previews corresponding to buttons (same index)."""
+@export var color_picker: ColorPickerButton
 
+
+@export var next_button: Button
+
+
+@export var shape_buttons: Array[Button]
+"""
+Buttons for Shapes
+"""
+
+var button_mesh_slots: Dictionary[int, Node3D] = {}
+"""
+Dict to set new shape 
+"""
 
 
 
@@ -30,40 +39,37 @@ func _ready() -> void:
 	#_collect_button_meshes()
 	_connect_click_events()
 	print("[UI] Buttons + meshes ready")
+	
 
 
-# ==================================================
-# Setup
-# ==================================================
-
-func _collect_button_meshes() -> void:
-	"""
-	Collects one MeshInstance3D per button.
-	Index alignment with buttons is guaranteed.
-	"""
-	button_mesh_references.clear()
-
-	for i in range(buttons.size()):
-		var mesh := _find_mesh(buttons[i])
-		button_mesh_references.append(mesh)
-
-		if mesh:
-			print("[UI] Found mesh for button:", i)
-		else:
-			print("[UI][WARN] No mesh for button:", i)
 
 # ==================================================
 # Click Logic
 # ==================================================
 
 func _connect_click_events() -> void:
-	for i in range(buttons.size()):
-		buttons[i].pressed.connect(_on_button_clicked.bind(i))
-		print("[UI] Connected CLICK for button:", i)
+	for i in range(shape_buttons.size()):
+		shape_buttons[i].pressed.connect(_on_shape_button_clicked.bind(i))
+
+	if next_button:
+		next_button.pressed.connect(_on_next_button_clicked)
 
 
-func _on_button_clicked(index: int) -> void:
-	print("[UI] BUTTON CLICKED | index =", index)
+
+func _on_shape_button_clicked(index: int) -> void:
+	if DEBUG_SIGNALS:
+		print("[UI][SIGNAL] shape_selected | index =", index)
+
+	emit_signal("shape_selected", index)
+
+	
+func _on_next_button_clicked() -> void:
+	if DEBUG_SIGNALS:
+		print("[UI][SIGNAL] next_requested")
+
+	emit_signal("next_requested")
+
+
 	
 	
 	
@@ -81,3 +87,35 @@ func _find_mesh(root: Node) -> MeshInstance3D:
 			return found
 
 	return null
+	
+	
+	
+# ==================================================
+# BUTTON MESHs
+# ==================================================
+	
+func register_button_slot(index: int, slot: Node3D) -> void:
+	button_mesh_slots[index] = slot
+
+	
+	
+func replace_button_meshes(index: int, new_container: Node3D) -> void:
+	var slot: Node3D = button_mesh_slots.get(index)
+	if slot == null:
+		push_warning("No mesh slot registered for button %d" % index)
+		return
+
+	for child in slot.get_children():
+		child.queue_free()
+
+	slot.add_child(new_container)
+
+	
+# ==================================================
+# COLOR PICKER
+# ==================================================
+
+
+
+	
+	
