@@ -22,9 +22,9 @@ enum EMOTIONS {
 	
 static func GetRandomEmotion() -> int:
 	var values = MaskComponent.EMOTIONS.values()
-	return values[randi() % values.size()]
+	return values[randi() % values.size()] as MaskComponent.EMOTIONS
 
 	
 static func GetRandomSlot() -> int:
 	var values = MaskComponent.SLOT.values()
-	return values[randi() % values.size()]
+	return values[randi() % values.size()] as MaskComponent.SLOT
