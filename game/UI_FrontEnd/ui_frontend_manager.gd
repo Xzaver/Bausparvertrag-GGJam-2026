@@ -1,99 +1,76 @@
 extends Control
+"""
+Minimal UI click handler using a button list.
+"""
 
-signal ui_selection_changed(mask_index: int, color: Color)
+# ==================================================
+# Exported UI References
+# ==================================================
 
-@export var mask_buttons: Array[Button]
-@export var color_picker: ColorPickerButton
-@export var next_button: Button
-@export var scroll_left_button: Button
-@export var scroll_right_button: Button
+@export var buttons: Array[Button]
+"""Clickable buttons (order = index)."""
+
+@export var button_meshes: Array[MeshInstance3D]
+"""Mesh previews corresponding to buttons (same index)."""
 
 
-var current_mask_index: int = -1
-var current_color: Color = Color.WHITE
 
+# ==================================================
+# Lifecycle
+# ==================================================
 
 func _ready() -> void:
-	print("[UI] UI Manager ready")
-
-	_connect_mask_buttons()
-	_connect_color_picker()
-	_connect_next_button()
-	_connect_scroll_buttons()
+	_collect_button_meshes()
+	_connect_click_events()
+	print("[UI] Buttons + meshes ready")
 
 
-func _connect_mask_buttons() -> void:
-	for i in range(mask_buttons.size()):
-		var button := mask_buttons[i]
-		button.pressed.connect(_on_mask_button_pressed.bind(i))
-		print("[UI] Connected mask button index:", i)
+# ==================================================
+# Setup
+# ==================================================
+
+func _collect_button_meshes() -> void:
+	"""
+	Collects one MeshInstance3D per button.
+	Index alignment with buttons is guaranteed.
+	"""
+	button_meshes.clear()
+
+	for i in range(buttons.size()):
+		var mesh := _find_mesh(buttons[i])
+		button_meshes.append(mesh)
+
+		if mesh:
+			print("[UI] Found mesh for button:", i)
+		else:
+			print("[UI][WARN] No mesh for button:", i)
+
+# ==================================================
+# Click Logic
+# ==================================================
+
+func _connect_click_events() -> void:
+	for i in range(buttons.size()):
+		buttons[i].pressed.connect(_on_button_clicked.bind(i))
+		print("[UI] Connected CLICK for button:", i)
 
 
-func _connect_color_picker() -> void:
-	if color_picker:
-		color_picker.color_changed.connect(_on_color_changed)
-		print("[UI] Connected color picker")
+func _on_button_clicked(index: int) -> void:
+	print("[UI] BUTTON CLICKED | index =", index)
+	
+	
+	
+# ==================================================
+# Utilities
+# ==================================================
 
+func _find_mesh(root: Node) -> MeshInstance3D:
+	for child in root.get_children():
+		if child is MeshInstance3D:
+			return child
 
-func _connect_next_button() -> void:
-	if next_button:
-		next_button.pressed.connect(_on_next_pressed)
-		print("[UI] Connected NEXT button")
+		var found := _find_mesh(child)
+		if found:
+			return found
 
-
-func _connect_scroll_buttons() -> void:
-	if scroll_left_button:
-		scroll_left_button.pressed.connect(_on_scroll_left_pressed)
-		print("[UI] Connected SCROLL LEFT button")
-
-	if scroll_right_button:
-		scroll_right_button.pressed.connect(_on_scroll_right_pressed)
-		print("[UI] Connected SCROLL RIGHT button")
-
-
-# =========================
-# Event Handlers
-# =========================
-
-func _on_mask_button_pressed(index: int) -> void:
-	current_mask_index = index
-	print("[UI] Mask button pressed | index =", index)
-	_emit_change()
-
-
-func _on_color_changed(color: Color) -> void:
-	current_color = color
-	print("[UI] Color changed | color =", color)
-	_emit_change()
-
-
-func _on_next_pressed() -> void:
-	print("[UI] NEXT button pressed")
-	_emit_change()
-
-
-func _on_scroll_left_pressed() -> void:
-	print("[UI] Scroll LEFT pressed")
-
-
-func _on_scroll_right_pressed() -> void:
-	print("[UI] Scroll RIGHT pressed")
-
-
-# =========================
-# Emit
-# =========================
-
-func _emit_change() -> void:
-	print(
-		"[UI] Emit ui_selection_changed | mask_index =",
-		current_mask_index,
-		"| color =",
-		current_color
-	)
-
-	emit_signal(
-		"ui_selection_changed",
-		current_mask_index,
-		current_color
-	)
+	return null
