@@ -1,8 +1,10 @@
 class_name CustomerData
 
-var id : int
-var maskID : int
+static var EMPTY_MASK_ID = null
 
-func _init(initial_id : int, initialMaskID : int):
-	id = initialMaskID
+var id : int
+var maskID
+
+func _init(initial_id : int, initialMaskID):
+	id = initial_id
 	maskID = initialMaskID
