@@ -21,6 +21,8 @@ func save_mask(mask:MaskData) -> int:
 func set_mask(id:int,mask:MaskData):
 	if masks.has(id):
 		masks.set(id, mask)
+	else:
+		print("Mask with ID "+str(id)+" not found")
 
 
 func fetch_mask(id:int) -> MaskData:
