@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://dqb5huwrc4ohg"]
+
+[node name="UI_FrontEnd_Node" type="Control" unique_id=1647626456]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Footer_Container" type="MarginContainer" parent="." unique_id=284973261]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Footer_Container" unique_id=1566171528]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Button" type="Button" parent="Footer_Container/HBoxContainer" unique_id=257005878]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button2" type="Button" parent="Footer_Container/HBoxContainer" unique_id=821552757]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Footer_Container" type="HBoxContainer" parent="Footer_Container" unique_id=1335181294]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Left" type="HBoxContainer" parent="Footer_Container" unique_id=1501318371]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="ColorPicker" type="Button" parent="Footer_Container/Left" unique_id=691443905]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Color"
+
+[node name="Footer_mid" type="HBoxContainer" parent="Footer_Container" unique_id=1745171238]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="Footer_Container/Footer_mid" unique_id=2086139961]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Footer_Container/Footer_mid/MarginContainer" unique_id=433095163]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Button1" type="Button" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer" unique_id=1484087024]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "<"
+
+[node name="Button5" type="Button" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer" unique_id=100720903]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Shape1"
+
+[node name="Button6" type="Button" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer" unique_id=1847936998]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Shape1"
+
+[node name="Button2" type="Button" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer" unique_id=723188560]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Shape1"
+
+[node name="Button3" type="Button" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer" unique_id=1806233353]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Shape1"
+
+[node name="Button4" type="Button" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer" unique_id=243392702]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = ">"
+
+[node name="Right" type="HBoxContainer" parent="Footer_Container" unique_id=1520423335]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+
+[node name="Button2" type="Button" parent="Footer_Container/Right" unique_id=437535584]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = ">>"
