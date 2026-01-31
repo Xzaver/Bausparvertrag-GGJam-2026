@@ -94,9 +94,36 @@ func _on_next_button_clicked() -> void:
 func _on_color_changed(color: Color) -> void:
 	selected_color = color
 
-	print("[UI][SIGNAL] color_selected =", color)
+	if DEBUG_SIGNALS:
+		print("[UI][SIGNAL] color_selected =", color)
 
+	apply_color_to_all_meshes(color)
 	emit_signal("color_selected", color)
+
+	
+	
+	
+func apply_color_to_all_meshes(color: Color) -> void:
+	if DEBUG_SIGNALS:
+		print("[UI][SIGNAL] apply_color_to_all_meshes =", color)
+
+	for button in shape_buttons:
+		var container := button.mesh_container
+		if container == null:
+			continue
+
+		for child in container.get_children():
+			if child is MeshInstance3D:
+				var mat: Material = child.get_surface_override_material(0)
+
+				if mat == null:
+					mat = StandardMaterial3D.new()
+					child.set_surface_override_material(0, mat)
+
+				(mat as StandardMaterial3D).albedo_color = color
+
+
+
 
 # ==================================================
 # MESH
@@ -115,5 +142,6 @@ func debug_print_shape_meshes() -> void:
 				print("Button", i, "→ Mesh:", child.name)
 
 	print("===== END DEBUG =====")
+	
 
 	
