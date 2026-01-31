@@ -3,6 +3,7 @@ class_name GameSession
 var properties : GameSessionProperties
 var currentGameState : GameState
 var maxCustomers : int
+var currentCustomer : CustomerData
 
 var customers : Array[CustomerData] = []
 
@@ -35,6 +36,9 @@ func NextState() -> GameState:
 	SetGameState(newState)
 	
 	return currentGameState
+	
+func SetCurrentCustomer(customer : CustomerData) -> void:
+	currentCustomer = customer
 	
 func rand_int(min_val: int, max_val: int) -> int:
 	return min_val + (randi() % (max_val - min_val + 1))
