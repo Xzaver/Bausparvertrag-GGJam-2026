@@ -1,12 +1,19 @@
 [gd_scene format=3 uid="uid://dqb5huwrc4ohg"]
 
-[node name="UI_FrontEnd_Node" type="Control" unique_id=1647626456]
+[ext_resource type="Script" uid="uid://c15dkh36dwis3" path="res://game/UI_FrontEnd/ui_frontend_manager.gd" id="1_s0feo"]
+
+[node name="UI_FrontEnd_Node" type="Control" unique_id=1647626456 node_paths=PackedStringArray("mask_buttons", "next_button", "scroll_left_button", "scroll_right_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_s0feo")
+mask_buttons = [NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button5"), NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button6"), NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button2"), NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button3")]
+next_button = NodePath("Footer_Container/Right/NextStep")
+scroll_left_button = NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/ScrollLeft")
+scroll_right_button = NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/ScrollRight")
 
 [node name="Footer_Container" type="MarginContainer" parent="." unique_id=284973261]
 layout_mode = 1
@@ -65,7 +72,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="Button1" type="Button" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer" unique_id=1484087024]
+[node name="ScrollLeft" type="Button" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer" unique_id=1484087024]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -100,7 +107,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Shape1"
 
-[node name="Button4" type="Button" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer" unique_id=243392702]
+[node name="ScrollRight" type="Button" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer" unique_id=243392702]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -112,9 +119,14 @@ layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
 
-[node name="Button2" type="Button" parent="Footer_Container/Right" unique_id=437535584]
+[node name="NextStep" type="Button" parent="Footer_Container/Right" unique_id=437535584]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = ">>"
+
+[node name="MaskContainer" type="MarginContainer" parent="." unique_id=1689726219]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
