@@ -12,14 +12,18 @@ var masks: Dictionary
 
 
 
-func assemble_mask(mask:MaskData) -> int:
+func save_mask(mask:MaskData) -> int:
 	var id = ResourceUID.create_id()
 	masks.set(id,mask)
 	return id
 	
 
+func set_mask(id:int,mask:MaskData):
+	if masks.has(id):
+		masks.set(id, mask)
+	else:
+		print("Mask with ID "+str(id)+" not found")
 
 
-
-func retrieve_mask(id:int) -> MaskData:
+func fetch_mask(id:int) -> MaskData:
 	return masks.get(id)

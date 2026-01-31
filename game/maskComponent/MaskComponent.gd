@@ -6,7 +6,8 @@ enum SLOT {
 	EYES = 0,
 	MOUTH = 1,
 	TOP = 2,
-	SHAPE = 3,}
+	SHAPE = 3,
+	}
 @export var slot:SLOT
 
 enum EMOTIONS {
@@ -14,9 +15,10 @@ enum EMOTIONS {
 	HAPPY = 1,
 	ANGRY = 2,
 	CUTE = 3,
-}
+	}
 @export var emotions:EMOTIONS
 
+@export var colorizeableMeshes :Array[MeshInstance3D] = []
 
 
 # Called when the node enters the scene tree for the first time.
