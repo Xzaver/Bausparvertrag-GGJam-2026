@@ -1,10 +1,7 @@
-class_name MaskData extends Node3D
+class_name MaskData extends Resource
 
 
-
-
-var eyes
-var mouth
-var top
-var shape
-var id
+@export var eyes:MaskComponent.EMOTIONS
+@export var mouth:MaskComponent.EMOTIONS
+@export var top:MaskComponent.EMOTIONS
+@export var shape:MaskComponent.EMOTIONS
