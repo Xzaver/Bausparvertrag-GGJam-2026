@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c15dkh36dwis3" path="res://game/UI_FrontEnd/ui_frontend_manager.gd" id="1_s0feo"]
 [ext_resource type="Script" uid="uid://brigfxxspm5r" path="res://game/UI_FrontEnd/custom_button_1.gd" id="2_h7x47"]
 [ext_resource type="BoxMesh" uid="uid://dfyxh7aymac5y" path="res://game/UI_FrontEnd/new_box_mesh.tres" id="2_s83qi"]
-[ext_resource type="Script" uid="uid://duuirnwyn4rj2" path="res://game/UI_FrontEnd/hover_light.gd" id="2_y2ony"]
+[ext_resource type="Script" path="res://game/UI_FrontEnd/hover_light.gd" id="2_y2ony"]
 [ext_resource type="SphereMesh" uid="uid://784fvu0wgu28" path="res://game/UI_FrontEnd/new_sphere_mesh.tres" id="4_h7x47"]
 
 [sub_resource type="Environment" id="Environment_y2ony"]
@@ -28,6 +28,7 @@ shape_buttons = [NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxConta
 debug_mesh_container = NodePath("Node3D/MeshContainer")
 
 [node name="Header" type="MarginContainer" parent="." unique_id=594615917]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -387,6 +388,7 @@ size_flags_vertical = 4
 text = ">>"
 
 [node name="DEBUG" type="Button" parent="Footer_Container" unique_id=1296362463]
+visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -394,6 +396,7 @@ size_flags_vertical = 4
 text = "DEBUG"
 
 [node name="Node3D" type="Node3D" parent="." unique_id=226628662]
+visible = false
 script = ExtResource("2_y2ony")
 
 [node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=1749789434]
