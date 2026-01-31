@@ -1,6 +1,21 @@
 [gd_scene format=3 uid="uid://cry7tttsbil0f"]
 
 [ext_resource type="Script" uid="uid://bbw7djgavoxo4" path="res://game/game.gd" id="1_l1rk1"]
+[ext_resource type="PackedScene" uid="uid://cd1a0ufvbeexe" path="res://game/core/GameLoop.tscn" id="2_h7iqs"]
+[ext_resource type="PackedScene" uid="uid://bocv7txk50p4d" path="res://game/maskContructor/maskConstructor.tscn" id="3_4fuuu"]
 
 [node name="Game" type="Node3D" unique_id=1891684557]
 script = ExtResource("1_l1rk1")
+
+[node name="GameSession" parent="." unique_id=247687767 node_paths=PackedStringArray("maskBuilder") instance=ExtResource("2_h7iqs")]
+maskBuilder = NodePath("../MaskConstructor")
+
+[node name="MaskConstructor" parent="." unique_id=1958036344 instance=ExtResource("3_4fuuu")]
+
+[node name="MeshInstance3D" parent="MaskConstructor" index="0" unique_id=1609467751]
+visible = false
+
+[node name="Camera3D" parent="MaskConstructor" index="1" unique_id=1128725853]
+visible = false
+
+[editable path="MaskConstructor"]
