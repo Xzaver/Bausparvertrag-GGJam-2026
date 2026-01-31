@@ -2,16 +2,34 @@ extends Node
 
 class_name MaskConstructor
 
-#@export var TestMesh :MeshInstance3D = null
-#@export var TestColor :Color = Color(1,1,1,1)
+
 var currentMaskData :MaskData
-#
-## Called when the node enters the scene tree for the first time.
-#func _ready() -> void:
-#	
-#	var TestMat: BaseMaterial3D = TestMesh.get_surface_override_material(0)
-#	TestMat.set_albedo(TestColor)
-#
+
+@export var eyePos :Node3D
+@export var mouthPos :Node3D
+@export var topPos :Node3D
+@export var shapePos :Node3D
+
+# --- components
+
+@export var 
+@export var 
+@export var 
+@export var 
+@export var 
+@export var 
+@export var 
+@export var 
+@export var 
+@export var 
+@export var 
+@export var
+@export var 
+
+
+
+
+
 
 signal FinalizeMask(maskDataToSend:MaskData)
 
@@ -20,6 +38,12 @@ func clearBuilder():
 
 func renderMask(maskData:MaskData):
 	print("Render Mask ")
+	
+	match mas
+	
+	match maskData:
+		maskData.eyes
+	
 	pass
 
 func ReceiveMask(maskdatafrommanager:MaskData):
@@ -43,5 +67,3 @@ func updateMaskProperty(slot:MaskComponent.SLOT,emotion:MaskComponent.EMOTIONS):
 			
 		MaskComponent.SLOT.SHAPE:
 			currentMaskData.shape = emotion
-			
-			

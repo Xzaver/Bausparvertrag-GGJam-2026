@@ -1,21 +1,97 @@
-[gd_scene format=3 uid="uid://cry7tttsbil0f"]
+[gd_scene format=3 uid="uid://cq1syltpiiswv"]
 
-[ext_resource type="Script" uid="uid://bbw7djgavoxo4" path="res://game/game.gd" id="1_l1rk1"]
+[ext_resource type="Script" path="res://game/game.gd" id="1_l1rk1"]
 [ext_resource type="PackedScene" uid="uid://cd1a0ufvbeexe" path="res://game/core/GameLoop.tscn" id="2_h7iqs"]
 [ext_resource type="PackedScene" uid="uid://bocv7txk50p4d" path="res://game/maskContructor/maskConstructor.tscn" id="3_4fuuu"]
+[ext_resource type="PackedScene" uid="uid://bk0qm484ny6gm" path="res://assets/levelCompononents/Room/Room.gltf" id="5_dxrkv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4fuuu"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_dxrkv"]
+sky_material = SubResource("ProceduralSkyMaterial_4fuuu")
+
+[sub_resource type="Environment" id="Environment_dakft"]
+background_mode = 2
+sky = SubResource("Sky_dxrkv")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_4fuuu"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_dxrkv"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dakft"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_u5opy"]
 
 [node name="Game" type="Node3D" unique_id=1891684557]
 script = ExtResource("1_l1rk1")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1421054625]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 8.312077, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1350188789]
+environment = SubResource("Environment_dakft")
+
 [node name="GameSession" parent="." unique_id=247687767 node_paths=PackedStringArray("maskBuilder") instance=ExtResource("2_h7iqs")]
 maskBuilder = NodePath("../MaskConstructor")
 
-[node name="MaskConstructor" parent="." unique_id=1958036344 instance=ExtResource("3_4fuuu")]
+[node name="MaskConstructor" parent="." unique_id=1958036344 node_paths=PackedStringArray("eyePos", "mouthPos", "topPos", "shapePos") instance=ExtResource("3_4fuuu")]
+eyePos = NodePath("../Workbench/MaskConstruct/EyesOrig")
+mouthPos = NodePath("../Workbench/MaskConstruct/MouthOrig")
+topPos = NodePath("../Workbench/MaskConstruct/TopOrig")
+shapePos = NodePath("../Workbench/MaskConstruct/ShapeOrig")
 
-[node name="MeshInstance3D" parent="MaskConstructor" index="0" unique_id=1609467751]
-visible = false
+[node name="Room" parent="." unique_id=1008153374 instance=ExtResource("5_dxrkv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 
-[node name="Camera3D" parent="MaskConstructor" index="1" unique_id=1128725853]
-visible = false
+[node name="Player" type="Node" parent="." unique_id=1446228021]
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=739051302]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.816466, 2.5590026)
+current = true
+
+[node name="Workbench" type="Node" parent="." unique_id=859286135]
+
+[node name="MaskConstruct" type="Node" parent="Workbench" unique_id=880345676]
+
+[node name="EyesOrig" type="Node3D" parent="Workbench/MaskConstruct" unique_id=188212834]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.918454, 1.3486253)
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Workbench/MaskConstruct/EyesOrig" unique_id=1132119206]
+transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, -0.08, 0, 0)
+mesh = SubResource("SphereMesh_4fuuu")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Workbench/MaskConstruct/EyesOrig" unique_id=1411153325]
+transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, 0.08, 0, 0)
+mesh = SubResource("SphereMesh_4fuuu")
+
+[node name="MouthOrig" type="Node3D" parent="Workbench/MaskConstruct" unique_id=800610969]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1.8227699, 1.3368027)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Workbench/MaskConstruct/MouthOrig" unique_id=1169488896]
+transform = Transform3D(0.15944701, 0, 0, 0, 0.15944701, 0, 0, 0, 0.15944701, 0, 0, 0)
+mesh = SubResource("PrismMesh_dxrkv")
+
+[node name="TopOrig" type="Node3D" parent="Workbench/MaskConstruct" unique_id=1123904473]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0726655, 1.3286641)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Workbench/MaskConstruct/TopOrig" unique_id=1294761666]
+transform = Transform3D(0.099592924, -0.0575, 0, 0.0575, 0.099592924, 0, 0, 0, 0.115, -0.1, 0, 0)
+mesh = SubResource("CylinderMesh_dakft")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Workbench/MaskConstruct/TopOrig" unique_id=679068309]
+transform = Transform3D(0.099592924, 0.0575, 0, -0.0575, 0.099592924, 0, 0, 0, 0.115, 0.1, 0, 0)
+mesh = SubResource("CylinderMesh_dakft")
+
+[node name="ShapeOrig" type="Node3D" parent="Workbench/MaskConstruct" unique_id=1568701089]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8546655, 1.3286641)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Workbench/MaskConstruct/ShapeOrig" unique_id=699160008]
+transform = Transform3D(0.2912028, 0, 0, 0, 0.2912028, 0, 0, 0, 0.122320436, 0, 0, 0)
+mesh = SubResource("BoxMesh_u5opy")
 
 [editable path="MaskConstructor"]
