@@ -12,3 +12,12 @@ class_name MaskData extends Resource
 @export var mouthBroken:bool = false
 @export var topBroken:bool = false
 @export var shapeBroken:bool = false
+
+static func RandomMask() -> MaskData:
+	var mask : MaskData
+	mask.eyes = GetRandomEmotion()
+	mask.mouth = GetRandomEmotion()
+	mask.shape = GetRandomEmotion()
+	mask.top = GetRandomEmotion()
+	
+	return mask

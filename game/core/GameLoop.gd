@@ -36,6 +36,8 @@ func onSessionStateChanged(newState : GameSession.GameState) -> void:
 				mask = mask.duplicate()	
 			
 			maskBuilder.ReceiveMask(mask)
+			
+			maskBuilder.updateMaskProperty(MaskComponent.GetRandomSlot(), MaskComponent.GetRandomEmotion())
 			#Call Fetch Mask ID from MaskResourceManager
 			#Call Render Mask/Customer from MaskBuilder
 		GameSession.GameState.FinalizeCustomer:
