@@ -28,15 +28,25 @@ func onSessionStateChanged(newState : GameSession.GameState) -> void:
 	
 	match newState:
 		GameSession.GameState.WaitingForCustomer:
+			
 			session.SetCurrentCustomer(scheduler.Next())
 			print("Customer " + str(session.currentCustomer.id) + " is entering the shop")
+			
+			var mask : MaskData = MaskResourceManager.fetch_mask(session.currentCustomer.maskID)
+			
+			if mask != null:
+				print("Customer has a mask: \n" + mask.ToString())
+			else:
+				print("Customer has no mask yet. DO IT!")
+			
+		GameSession.GameState.ProcessCustomer:
+			
 			var mask : MaskData = MaskResourceManager.fetch_mask(session.currentCustomer.maskID)
 			
 			if mask != null:
 				mask = mask.duplicate()	
 			
 			maskBuilder.ReceiveMask(mask)
-			
 			
 			var rndMask : MaskData = MaskData.RandomMask()
 			
@@ -45,8 +55,8 @@ func onSessionStateChanged(newState : GameSession.GameState) -> void:
 			maskBuilder.updateMaskProperty(MaskComponent.SLOT.TOP, rndMask.top)
 			maskBuilder.updateMaskProperty(MaskComponent.SLOT.SHAPE, rndMask.shape)
 			
-			#Call Fetch Mask ID from MaskResourceManager
-			#Call Render Mask/Customer from MaskBuilder
+			maskBuilder.FinalizeMask.emit(maskBuilder.currentMaskData)
+			
 		GameSession.GameState.FinalizeCustomer:
 			#Receive Mask from MaskBuilder
 			#Evaluate Mask Errors
@@ -59,5 +69,5 @@ func onMaskFinalized(maskData: MaskData) -> void:
 	if session.currentCustomer.maskID == CustomerData.EMPTY_MASK_ID:
 		session.currentCustomer.maskID = MaskResourceManager.save_mask(maskData)
 		
-	print("Mask finalized")
+	print("Mask finalized: \n" + maskData.ToString())
 	pass
