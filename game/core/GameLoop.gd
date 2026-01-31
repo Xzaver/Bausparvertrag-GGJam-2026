@@ -37,7 +37,14 @@ func onSessionStateChanged(newState : GameSession.GameState) -> void:
 			
 			maskBuilder.ReceiveMask(mask)
 			
-			maskBuilder.updateMaskProperty(MaskComponent.GetRandomSlot(), MaskComponent.GetRandomEmotion())
+			
+			var rndMask : MaskData = MaskData.RandomMask()
+			
+			maskBuilder.updateMaskProperty(MaskComponent.SLOT.EYES, rndMask.eyes)
+			maskBuilder.updateMaskProperty(MaskComponent.SLOT.MOUTH, rndMask.mouth)
+			maskBuilder.updateMaskProperty(MaskComponent.SLOT.TOP, rndMask.top)
+			maskBuilder.updateMaskProperty(MaskComponent.SLOT.SHAPE, rndMask.shape)
+			
 			#Call Fetch Mask ID from MaskResourceManager
 			#Call Render Mask/Customer from MaskBuilder
 		GameSession.GameState.FinalizeCustomer:
