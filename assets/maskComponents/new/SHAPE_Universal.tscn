@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://caop6s06g4pib"]
+
+[ext_resource type="Script" uid="uid://cshjpferrlj2n" path="res://game/maskComponent/MaskComponent.gd" id="1_h5dbh"]
+[ext_resource type="PackedScene" uid="uid://ci16vrxn4s8mr" path="res://assets/levelCompononents/Mask_Shape/Mask_Shape.gltf" id="2_mb8uu"]
+
+[node name="EyesSad" type="Node3D" unique_id=1796902024]
+
+[node name="MaskComponent" type="Node3D" parent="." unique_id=897226220 node_paths=PackedStringArray("colorizeableMeshes")]
+script = ExtResource("1_h5dbh")
+slot = 3
+colorizeableMeshes = [NodePath("Mask_Shape/Mask_Shape_01")]
+metadata/_custom_type_script = "uid://cshjpferrlj2n"
+
+[node name="Mask_Shape" parent="MaskComponent" unique_id=797940360 instance=ExtResource("2_mb8uu")]
+
+[editable path="MaskComponent/Mask_Shape"]
