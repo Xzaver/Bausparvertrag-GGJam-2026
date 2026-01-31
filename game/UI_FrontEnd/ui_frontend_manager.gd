@@ -1,3 +1,7 @@
+"""
+UI Manager
+"""
+
 extends Control
 """
 Minimal UI click handler using a button list.
@@ -18,19 +22,11 @@ signal color_selected(color: Color)
 @export var color_picker: ColorPickerButton
 var selected_color: Color = Color.WHITE
 
-
 @export var next_button: Button
+@export var shape_buttons: Array[ShapeButton]
 
-
-@export var shape_buttons: Array[Button]
-"""
-Buttons for Shapes
-"""
 
 var button_mesh_slots: Dictionary[int, Node3D] = {}
-"""
-Dict to set new shape 
-"""
 
 
 
@@ -39,14 +35,27 @@ Dict to set new shape
 # ==================================================
 
 func _ready() -> void:
-	#_collect_button_meshes()
 	_connect_click_events()
-	print("[UI] Buttons + meshes ready")
+
+	for i in range(shape_buttons.size()):
+		var button := shape_buttons[i]
+		var slot := button.mesh_container
+
+		if slot == null:
+			push_warning("MeshContainer missing for ShapeButton %d" % i)
+			continue
+
+		button_mesh_slots[i] = slot
+
+		if DEBUG_SIGNALS:
+			print("[UI][SLOT] Button", i, "→ MeshContainer:", slot.name)
+
 	if color_picker:
 		color_picker.color_changed.connect(_on_color_changed)
-	else:
-		push_warning("ColorPickerButton not assigned")
+		
+	debug_print_shape_meshes()
 	
+
 
 
 
@@ -75,49 +84,8 @@ func _on_next_button_clicked() -> void:
 		print("[UI][SIGNAL] next_requested")
 
 	emit_signal("next_requested")
+	
 
-
-	
-	
-	
-# ==================================================
-# Utilities
-# ==================================================
-
-func _find_mesh(root: Node) -> MeshInstance3D:
-	for child in root.get_children():
-		if child is MeshInstance3D:
-			return child
-
-		var found := _find_mesh(child)
-		if found:
-			return found
-
-	return null
-	
-	
-	
-# ==================================================
-# BUTTON MESHs
-# ==================================================
-	
-func register_button_slot(index: int, slot: Node3D) -> void:
-	button_mesh_slots[index] = slot
-
-	
-	
-func replace_button_meshes(index: int, new_container: Node3D) -> void:
-	var slot: Node3D = button_mesh_slots.get(index)
-	if slot == null:
-		push_warning("No mesh slot registered for button %d" % index)
-		return
-
-	for child in slot.get_children():
-		child.queue_free()
-
-	slot.add_child(new_container)
-
-	
 # ==================================================
 # COLOR PICKER
 # ==================================================
@@ -130,5 +98,22 @@ func _on_color_changed(color: Color) -> void:
 
 	emit_signal("color_selected", color)
 
-	
+# ==================================================
+# MESH
+# ==================================================
+
+func debug_print_shape_meshes() -> void:
+	print("===== DEBUG: ShapeButton Mesh Names =====")
+
+	for i in range(shape_buttons.size()):
+		var button := shape_buttons[i]
+		if button == null or button.mesh_container == null:
+			continue
+
+		for child in button.mesh_container.get_children():
+			if child is MeshInstance3D:
+				print("Button", i, "→ Mesh:", child.name)
+
+	print("===== END DEBUG =====")
+
 	
