@@ -25,9 +25,14 @@ var selected_color: Color = Color.WHITE
 @export var next_button: Button
 @export var shape_buttons: Array[ShapeButton]
 
+@export var debug_mesh_container: Node3D
+
+
 
 var button_mesh_slots: Dictionary[int, Node3D] = {}
 
+
+var active_shape_index: int = -1
 
 
 # ==================================================
@@ -53,9 +58,6 @@ func _ready() -> void:
 	if color_picker:
 		color_picker.color_changed.connect(_on_color_changed)
 		
-	debug_print_shape_meshes()
-	
-
 
 
 
@@ -73,17 +75,23 @@ func _connect_click_events() -> void:
 
 
 func _on_shape_button_clicked(index: int) -> void:
+	active_shape_index = index
+
 	if DEBUG_SIGNALS:
 		print("[UI][SIGNAL] shape_selected | index =", index)
 
 	emit_signal("shape_selected", index)
+
 
 	
 func _on_next_button_clicked() -> void:
 	if DEBUG_SIGNALS:
 		print("[UI][SIGNAL] next_requested")
 
+	apply_active_shape_to_debug_container()
 	emit_signal("next_requested")
+
+
 	
 
 # ==================================================
@@ -124,24 +132,35 @@ func apply_color_to_all_meshes(color: Color) -> void:
 
 
 
+func apply_active_shape_to_debug_container() -> void:
+	if debug_mesh_container == null:
+		push_warning("[UI][DEBUG] debug_mesh_container IS NULL")
+		return
 
-# ==================================================
-# MESH
-# ==================================================
+	if active_shape_index < 0 or active_shape_index >= shape_buttons.size():
+		push_warning("[UI][DEBUG] No active shape selected")
+		return
 
-func debug_print_shape_meshes() -> void:
-	print("===== DEBUG: ShapeButton Mesh Names =====")
+	var source_container := shape_buttons[active_shape_index].mesh_container
+	if source_container == null:
+		push_warning("[UI][DEBUG] Active Shape has no mesh_container")
+		return
 
-	for i in range(shape_buttons.size()):
-		var button := shape_buttons[i]
-		if button == null or button.mesh_container == null:
-			continue
+	# Alte Inhalte löschen
+	for child in debug_mesh_container.get_children():
+		child.queue_free()
 
-		for child in button.mesh_container.get_children():
-			if child is MeshInstance3D:
-				print("Button", i, "→ Mesh:", child.name)
+	# Meshes kopieren
+	for child in source_container.get_children():
+		if child is MeshInstance3D:
+			var clone := child.duplicate() as MeshInstance3D
+			debug_mesh_container.add_child(clone)
 
-	print("===== END DEBUG =====")
-	
+	if DEBUG_SIGNALS:
+		print(
+			"[UI][DEBUG] Applied shape",
+			active_shape_index,
+			"to debug_mesh_container"
+		)
 
 	
