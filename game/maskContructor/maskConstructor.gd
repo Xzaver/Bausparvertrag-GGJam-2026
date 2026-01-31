@@ -19,14 +19,15 @@ func clearBuilder():
 	pass
 
 func renderMask(maskData:MaskData):
+	print("Render Mask ")
 	pass
 
 func ReceiveMask(maskdatafrommanager:MaskData):
-	pass
-
-func InitMaskBuilder():
-	
-	currentMaskData = MaskData.new()
+	if maskdatafrommanager == null:
+		currentMaskData = MaskData.new()
+	else:
+		currentMaskData = maskdatafrommanager
+		renderMask(currentMaskData)
 
 func updateMaskProperty(slot:MaskComponent.SLOT,emotion:MaskComponent.EMOTIONS):
 	

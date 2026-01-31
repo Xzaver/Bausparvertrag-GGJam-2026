@@ -2,6 +2,7 @@ extends Node
 
 var session : GameSession
 var scheduler : Scheduler
+@export var maskBuilder : MaskConstructor
 
 func _ready() -> void:
 	print("---STARTING GAME LOOP---")
@@ -10,6 +11,7 @@ func _ready() -> void:
 	
 	scheduler = RandomScheduler.new(session.customers)
 	
+	maskBuilder.FinalizeMask.connect(onMaskFinalized)
 	session.sessionStarted.connect(onSessionStarted)
 	session.stateChanged.connect(onSessionStateChanged)
 	session.Start()
@@ -28,6 +30,12 @@ func onSessionStateChanged(newState : GameSession.GameState) -> void:
 		GameSession.GameState.WaitingForCustomer:
 			session.SetCurrentCustomer(scheduler.Next())
 			print("Customer " + str(session.currentCustomer.id) + " is entering the shop")
+			var mask : MaskData = MaskResourceManager.fetch_mask(session.currentCustomer.maskID)
+			
+			if mask != null:
+				mask = mask.duplicate()	
+			
+			maskBuilder.ReceiveMask(mask)
 			#Call Fetch Mask ID from MaskResourceManager
 			#Call Render Mask/Customer from MaskBuilder
 		GameSession.GameState.FinalizeCustomer:
@@ -35,3 +43,12 @@ func onSessionStateChanged(newState : GameSession.GameState) -> void:
 			#Evaluate Mask Errors
 			#Next State
 			pass
+
+func onMaskFinalized(maskData: MaskData) -> void:
+	session.SetGameState(GameSession.GameState.FinalizeCustomer)
+	
+	if session.currentCustomer.maskID == CustomerData.EMPTY_MASK_ID:
+		session.currentCustomer.maskID = MaskResourceManager.save_mask(maskData)
+		
+	print("Mask finalized")
+	pass
