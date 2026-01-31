@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cd1a0ufvbeexe"]
+
+[ext_resource type="Script" uid="uid://4mhwar6rahrk" path="res://game/core/GameLoop.gd" id="1_h3ima"]
+
+[node name="GameSession" type="Node3D" unique_id=247687767]
+script = ExtResource("1_h3ima")
