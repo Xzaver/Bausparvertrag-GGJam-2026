@@ -3,17 +3,17 @@ extends Node
 class_name MaskComponent
 
 enum SLOT {
-	EYES = 1,
-	MOUTH = 2,
-	TOP = 3,
-	SHAPE = 4,}
+	EYES = 0,
+	MOUTH = 1,
+	TOP = 2,
+	SHAPE = 3,}
 @export var slot:SLOT
 
 enum EMOTIONS {
-	SAD = 1,
-	HAPPY = 2,
-	ANGRY = 3,
-	CUTE = 4,
+	SAD = 0,
+	HAPPY = 1,
+	ANGRY = 2,
+	CUTE = 3,
 }
 @export var emotions:EMOTIONS
 
