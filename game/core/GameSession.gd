@@ -1,14 +1,19 @@
 class_name GameSession
 
-var currentGameState : GameState
 var properties : GameSessionProperties
+var currentGameState : GameState
+var maxCustomers : int
+
+var customers : Array[CustomerData] = []
 
 signal sessionStarted
 signal stateChanged(newState : GameState)
 
 func _init(props: GameSessionProperties) -> void:
 	properties = props
-	print("Initialized Session")
+	maxCustomers = rand_int(properties.customerCountMin, properties.customerCountMax)
+	customers = CustomerFactory.CreateCustomers(0, maxCustomers)
+	print("Initialized Session with customer count: " + str(maxCustomers))
 
 func Start() -> void:
 	emit_signal("sessionStarted")
@@ -18,6 +23,9 @@ func Start() -> void:
 func SetGameState(state: GameState) -> void:
 	currentGameState = state
 	emit_signal("stateChanged", currentGameState)
+	
+func rand_int(min_val: int, max_val: int) -> int:
+	return min_val + (randi() % (max_val - min_val + 1))
 	
 enum GameState {
 	Init,
