@@ -1,9 +1,13 @@
-[gd_scene format=3 uid="uid://cq1syltpiiswv"]
+[gd_scene format=3 uid="uid://cry7tttsbil0f"]
 
-[ext_resource type="Script" path="res://game/game.gd" id="1_l1rk1"]
+[ext_resource type="Script" uid="uid://bbw7djgavoxo4" path="res://game/game.gd" id="1_l1rk1"]
 [ext_resource type="PackedScene" uid="uid://cd1a0ufvbeexe" path="res://game/core/GameLoop.tscn" id="2_h7iqs"]
 [ext_resource type="PackedScene" uid="uid://bocv7txk50p4d" path="res://game/maskContructor/maskConstructor.tscn" id="3_4fuuu"]
+[ext_resource type="PackedScene" uid="uid://dqb5huwrc4ohg" path="res://game/UI_FrontEnd/ui_front_end_node.tscn" id="5_dakft"]
 [ext_resource type="PackedScene" uid="uid://bk0qm484ny6gm" path="res://assets/levelCompononents/Room/Room.gltf" id="5_dxrkv"]
+[ext_resource type="PackedScene" uid="uid://rsqy8jlewifb" path="res://assets/levelCompononents/Happy_Eyes/Happy_eyes.gltf" id="5_y36n6"]
+[ext_resource type="PackedScene" uid="uid://cesojvhgn8hmi" path="res://assets/levelCompononents/Sad_Mouth/Sad_Mouth.gltf" id="6_l8g03"]
+[ext_resource type="PackedScene" uid="uid://ci16vrxn4s8mr" path="res://assets/levelCompononents/Mask_Shape/Mask_Shape.gltf" id="7_j8tme"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4fuuu"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -63,28 +67,39 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.918454, 1.3486253)
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Workbench/MaskConstruct/EyesOrig" unique_id=1132119206]
 transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, -0.08, 0, 0)
+visible = false
 mesh = SubResource("SphereMesh_4fuuu")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="Workbench/MaskConstruct/EyesOrig" unique_id=1411153325]
 transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, 0.08, 0, 0)
+visible = false
 mesh = SubResource("SphereMesh_4fuuu")
+
+[node name="Happy_eyes2" parent="Workbench/MaskConstruct/EyesOrig" unique_id=1578115889 instance=ExtResource("5_y36n6")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.1123867, -0.026047945)
 
 [node name="MouthOrig" type="Node3D" parent="Workbench/MaskConstruct" unique_id=800610969]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1.8227699, 1.3368027)
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Workbench/MaskConstruct/MouthOrig" unique_id=1169488896]
 transform = Transform3D(0.15944701, 0, 0, 0, 0.15944701, 0, 0, 0, 0.15944701, 0, 0, 0)
+visible = false
 mesh = SubResource("PrismMesh_dxrkv")
+
+[node name="Sad_Mouth2" parent="Workbench/MaskConstruct/MouthOrig" unique_id=1420715533 instance=ExtResource("6_l8g03")]
+transform = Transform3D(-8.742278e-08, -1, -3.5527137e-15, -3.5527137e-15, 3.5527137e-15, -1, 1, -8.742278e-08, -1.5529405e-22, -0.021644235, 0, -9.460983e-10)
 
 [node name="TopOrig" type="Node3D" parent="Workbench/MaskConstruct" unique_id=1123904473]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0726655, 1.3286641)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Workbench/MaskConstruct/TopOrig" unique_id=1294761666]
 transform = Transform3D(0.099592924, -0.0575, 0, 0.0575, 0.099592924, 0, 0, 0, 0.115, -0.1, 0, 0)
+visible = false
 mesh = SubResource("CylinderMesh_dakft")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Workbench/MaskConstruct/TopOrig" unique_id=679068309]
 transform = Transform3D(0.099592924, 0.0575, 0, -0.0575, 0.099592924, 0, 0, 0, 0.115, 0.1, 0, 0)
+visible = false
 mesh = SubResource("CylinderMesh_dakft")
 
 [node name="ShapeOrig" type="Node3D" parent="Workbench/MaskConstruct" unique_id=1568701089]
@@ -92,6 +107,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8546655, 1.3286641)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Workbench/MaskConstruct/ShapeOrig" unique_id=699160008]
 transform = Transform3D(0.2912028, 0, 0, 0, 0.2912028, 0, 0, 0, 0.122320436, 0, 0, 0)
+visible = false
 mesh = SubResource("BoxMesh_u5opy")
+
+[node name="Mask_Shape" parent="Workbench/MaskConstruct/ShapeOrig" unique_id=1938990181 instance=ExtResource("7_j8tme")]
+transform = Transform3D(1, 0, -3.5527137e-15, 0, -4.371139e-08, -1, -3.5527137e-15, 1, -4.371139e-08, 4.440892e-16, -0.031895638, -0.010597706)
+
+[node name="UI_FrontEnd_Node" parent="." unique_id=1647626456 instance=ExtResource("5_dakft")]
 
 [editable path="MaskConstructor"]
