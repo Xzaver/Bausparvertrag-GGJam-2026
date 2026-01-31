@@ -23,28 +23,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Footer_Container" unique_id=1566171528]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-
-[node name="Button" type="Button" parent="Footer_Container/HBoxContainer" unique_id=257005878]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Button2" type="Button" parent="Footer_Container/HBoxContainer" unique_id=821552757]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Footer_Container" type="HBoxContainer" parent="Footer_Container" unique_id=1335181294]
-layout_mode = 2
-size_flags_vertical = 8
-
 [node name="Left" type="HBoxContainer" parent="Footer_Container" unique_id=1501318371]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -217,14 +195,6 @@ light_color = Color(0.22446853, 0.99999994, 0.97581047, 1)
 light_energy = 0.0
 omni_range = 2.889
 
-[node name="Button3" type="Button" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer" unique_id=1806233353]
-visible = false
-custom_minimum_size = Vector2(150, 150)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "Shape1"
-
 [node name="ScrollRight" type="Button" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer" unique_id=243392702]
 visible = false
 custom_minimum_size = Vector2(80, 80)
@@ -244,8 +214,3 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = ">>"
-
-[node name="MaskContainer" type="MarginContainer" parent="." unique_id=1689726219]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
