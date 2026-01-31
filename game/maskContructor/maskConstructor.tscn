@@ -1,18 +1,6 @@
 [gd_scene format=3 uid="uid://bocv7txk50p4d"]
 
 [ext_resource type="Script" uid="uid://bja8bd72xxi1a" path="res://game/maskContructor/maskConstructor.gd" id="1_jai7m"]
-[ext_resource type="Material" uid="uid://crnrg56ty13tv" path="res://assets/maskComponents/maskMat.tres" id="2_blga7"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_jai7m"]
-
-[node name="MaskConstructor" type="Node" unique_id=1958036344 node_paths=PackedStringArray("TestMesh")]
+[node name="MaskConstructor" type="Node" unique_id=1958036344]
 script = ExtResource("1_jai7m")
-TestMesh = NodePath("MeshInstance3D")
-TestColor = Color(0.66561466, 0.32050332, 0.31608427, 1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1609467751]
-mesh = SubResource("BoxMesh_jai7m")
-surface_material_override/0 = ExtResource("2_blga7")
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1128725853]
-transform = Transform3D(0.6084152, 0, 0.7936189, 0, 1, 0, -0.7936189, 0, 0.6084152, 0.9224808, 0.54959404, 0.9241723)

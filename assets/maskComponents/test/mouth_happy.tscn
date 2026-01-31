@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bhu65fw8vtdjp"]
+
+[ext_resource type="PackedScene" uid="uid://lquv1vx3ouvu" path="res://game/maskComponent/maskComponent.tscn" id="1_c1up5"]
+
+[node name="mouthHAPPY" type="Node" unique_id=431755348]
+
+[node name="MaskComponent" parent="." unique_id=121624849 instance=ExtResource("1_c1up5")]
+slot = 1
+emotions = 1
