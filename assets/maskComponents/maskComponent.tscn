@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://lquv1vx3ouvu"]
+
+[ext_resource type="Script" uid="uid://cshjpferrlj2n" path="res://assets/maskComponents/MaskComponent.gd" id="1_lo5hc"]
+
+[node name="MaskComponent" type="Node" unique_id=121624849]
+script = ExtResource("1_lo5hc")
