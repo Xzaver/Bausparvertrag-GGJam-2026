@@ -1,9 +1,10 @@
 extends Node
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-	var sessionProperties : GameSessionProperties = GameSessionProperties.new(10)
+	print("---STARTING GAME LOOP---")
+	
+	var sessionProperties : GameSessionProperties = GameSessionProperties.new(5, 10)
 	var session : GameSession = GameSession.new(sessionProperties)
 	
 	session.sessionStarted.connect(onSessionStarted)
@@ -11,10 +12,8 @@ func _ready() -> void:
 	
 	session.Start()
 	
-	pass # Replace with function body.
+	pass
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
