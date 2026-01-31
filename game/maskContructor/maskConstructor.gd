@@ -12,12 +12,16 @@ func _ready() -> void:
 	var TestMat: BaseMaterial3D = TestMesh.get_surface_override_material(0)
 	TestMat.set_albedo(TestColor)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func clearBuilder():
 	pass
 
-func initMaskData():
+func renderMask(maskData:MaskData):
+	pass
+
+func ReceiveMask(maskdatafrommanager:MaskData):
+	pass
+
+func InitMaskBuilder():
 	
 	currentMaskData = MaskData.new()
 
@@ -25,5 +29,13 @@ func updateMaskProperty(slot:MaskComponent.SLOT,emotion:MaskComponent.EMOTIONS):
 	
 	match slot:
 		MaskComponent.SLOT.EYES:
-			
 			currentMaskData.eyes = emotion
+		
+		MaskComponent.SLOT.MOUTH:
+			currentMaskData.mouth = emotion
+			
+		MaskComponent.SLOT.TOP:
+			currentMaskData.top = emotion
+			
+		MaskComponent.SLOT.SHAPE:
+			currentMaskData.shape = emotion
