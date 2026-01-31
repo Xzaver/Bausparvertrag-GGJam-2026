@@ -24,10 +24,10 @@ func clearBuilder():
 func renderMask(maskData:MaskData):
 	print("Render Mask ")
 	
-	match mas
+	#match mas
 	
-	match maskData:
-		maskData.eyes
+	#match maskData:
+		#maskData.eyes
 	
 	pass
 
