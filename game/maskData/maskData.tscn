@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://deswofn2khbds"]
+
+[ext_resource type="Script" uid="uid://mr7diphak4u3" path="res://game/maskData/maskData.gd" id="1_17h40"]
+
+[node name="Mask" type="Node3D" unique_id=1872510267]
+script = ExtResource("1_17h40")
