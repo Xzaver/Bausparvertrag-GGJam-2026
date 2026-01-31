@@ -5,7 +5,7 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_s0feo"]
 
-[node name="UI_FrontEnd_Node" type="Control" unique_id=1647626456 node_paths=PackedStringArray("next_button", "shape_buttons")]
+[node name="UI_FrontEnd_Node" type="Control" unique_id=1647626456 node_paths=PackedStringArray("color_picker", "next_button", "shape_buttons")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s0feo")
+color_picker = NodePath("Footer_Container/Left/ColorPickerButton")
 next_button = NodePath("Footer_Container/Right/NextStep")
 shape_buttons = [NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape1"), NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2"), NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape3"), NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape4")]
 

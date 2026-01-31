@@ -14,6 +14,7 @@ signal next_requested
 const DEBUG_SIGNALS := true
 
 @export var color_picker: ColorPickerButton
+var selected_color: Color = Color.WHITE
 
 
 @export var next_button: Button
@@ -39,6 +40,11 @@ func _ready() -> void:
 	#_collect_button_meshes()
 	_connect_click_events()
 	print("[UI] Buttons + meshes ready")
+	if color_picker:
+		color_picker.color_changed.connect(_on_color_changed)
+		print("[UI] ColorPicker connected")
+	else:
+		push_warning("ColorPickerButton not assigned")
 	
 
 
@@ -116,6 +122,8 @@ func replace_button_meshes(index: int, new_container: Node3D) -> void:
 # ==================================================
 
 
-
+func _on_color_changed(color: Color) -> void:
+	selected_color = color
+	print("[UI] Color updated:", selected_color)
 	
 	
