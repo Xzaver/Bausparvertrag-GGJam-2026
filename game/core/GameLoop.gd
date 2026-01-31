@@ -4,9 +4,7 @@ var session : GameSession
 var scheduler : Scheduler
 
 func _ready() -> void:
-	
 	print("---STARTING GAME LOOP---")
-	
 	var sessionProperties : GameSessionProperties = GameSessionProperties.new(5, 10)
 	session = GameSession.new(sessionProperties)
 	
@@ -14,10 +12,7 @@ func _ready() -> void:
 	
 	session.sessionStarted.connect(onSessionStarted)
 	session.stateChanged.connect(onSessionStateChanged)
-	
 	session.Start()
-	
-	pass
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("DebugNextState"):
@@ -33,3 +28,10 @@ func onSessionStateChanged(newState : GameSession.GameState) -> void:
 		GameSession.GameState.WaitingForCustomer:
 			session.SetCurrentCustomer(scheduler.Next())
 			print("Customer " + str(session.currentCustomer.id) + " is entering the shop")
+			#Call Fetch Mask ID from MaskResourceManager
+			#Call Render Mask/Customer from MaskBuilder
+		GameSession.GameState.FinalizeCustomer:
+			#Receive Mask from MaskBuilder
+			#Evaluate Mask Errors
+			#Next State
+			pass
