@@ -22,7 +22,7 @@ static func GetDifficultyProperties(_difficulty: Difficulty) -> GameSessionPrope
 	
 	match _difficulty:
 		Difficulty.EASY:
-			return GameSessionProperties.new(10, 4, 6, Difficulty.EASY)
+			return GameSessionProperties.new(10, 1, 1, Difficulty.EASY)
 		Difficulty.MEDIUM:
 			return GameSessionProperties.new(15, 5, 8, Difficulty.MEDIUM)
 		Difficulty.HARD:

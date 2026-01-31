@@ -60,18 +60,24 @@ func onSessionStateChanged(newState : GameSession.GameState) -> void:
 			if mask != null:
 				mask = mask.duplicate()	
 			
-			maskBuilder.ReceiveMask(mask)
-			
 			#if debug enabled we automatically create random mask and go to next state
-			if debugEnabled:
-				var rndMask : MaskData = MaskData.RandomMask()
+			if debugEnabled == true:
 				
-				maskBuilder.updateMaskProperty(MaskComponent.SLOT.EYES, rndMask.eyes)
-				maskBuilder.updateMaskProperty(MaskComponent.SLOT.MOUTH, rndMask.mouth)
-				maskBuilder.updateMaskProperty(MaskComponent.SLOT.TOP, rndMask.top)
-				maskBuilder.updateMaskProperty(MaskComponent.SLOT.SHAPE, rndMask.shape)
+				if mask == null:
+					mask = MaskData.RandomMask()
 				
-				maskBuilder.FinalizeMask.emit(maskBuilder.currentMaskData)
+				maskBuilder.ReceiveMask(mask)
+				
+				#maskBuilder.updateMaskProperty(MaskComponent.SLOT.EYES, rndMask.eyes)
+				#maskBuilder.updateMaskProperty(MaskComponent.SLOT.MOUTH, rndMask.mouth)
+				#maskBuilder.updateMaskProperty(MaskComponent.SLOT.TOP, rndMask.top)
+				#maskBuilder.updateMaskProperty(MaskComponent.SLOT.SHAPE, rndMask.shape)
+				
+				#maskBuilder.renderMask(rndMask)
+				
+				maskBuilder.FinalizeMask.emit(mask)
+			else: 
+				maskBuilder.ReceiveMask(mask)
 			
 			pass
 
