@@ -6,12 +6,14 @@ Minimal UI click handler using a button list.
 # ==================================================
 # Exported UI References
 # ==================================================
+const DEBUG_SIGNALS := true
 
 
 signal shape_selected(index: int)
 signal next_requested
+signal color_selected(color: Color)
 
-const DEBUG_SIGNALS := true
+
 
 @export var color_picker: ColorPickerButton
 var selected_color: Color = Color.WHITE
@@ -42,7 +44,6 @@ func _ready() -> void:
 	print("[UI] Buttons + meshes ready")
 	if color_picker:
 		color_picker.color_changed.connect(_on_color_changed)
-		print("[UI] ColorPicker connected")
 	else:
 		push_warning("ColorPickerButton not assigned")
 	
@@ -124,6 +125,10 @@ func replace_button_meshes(index: int, new_container: Node3D) -> void:
 
 func _on_color_changed(color: Color) -> void:
 	selected_color = color
-	print("[UI] Color updated:", selected_color)
+
+	print("[UI][SIGNAL] color_selected =", color)
+
+	emit_signal("color_selected", color)
+
 	
 	
