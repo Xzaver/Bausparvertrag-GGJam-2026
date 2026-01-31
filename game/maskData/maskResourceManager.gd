@@ -26,4 +26,9 @@ func set_mask(id:int,mask:MaskData):
 
 
 func fetch_mask(id:int) -> MaskData:
-	return masks.get(id)
+	
+	if masks.has(id):
+		return masks.get(id)
+	else:
+		print("Mask with ID "+str(id)+" not found")
+		return null
