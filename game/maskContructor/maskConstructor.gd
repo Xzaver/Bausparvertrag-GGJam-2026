@@ -12,21 +12,6 @@ var currentMaskData :MaskData
 
 # --- components
 
-@export var 
-@export var 
-@export var 
-@export var 
-@export var 
-@export var 
-@export var 
-@export var 
-@export var 
-@export var 
-@export var 
-@export var
-@export var 
-
-
 
 
 
