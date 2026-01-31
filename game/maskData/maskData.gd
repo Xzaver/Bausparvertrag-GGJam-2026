@@ -15,9 +15,9 @@ class_name MaskData extends Resource
 
 static func RandomMask() -> MaskData:
 	var mask : MaskData
-	mask.eyes = GetRandomEmotion()
-	mask.mouth = GetRandomEmotion()
-	mask.shape = GetRandomEmotion()
-	mask.top = GetRandomEmotion()
+	mask.eyes = MaskComponent.GetRandomEmotion()
+	mask.mouth = MaskComponent.GetRandomEmotion()
+	mask.shape = MaskComponent.GetRandomEmotion()
+	mask.top = MaskComponent.GetRandomEmotion()
 	
 	return mask
