@@ -1,25 +1,35 @@
 extends Node
 
-# Called when the node enters the scene tree for the first time.
+var session : GameSession
+var scheduler : Scheduler
+
 func _ready() -> void:
 	
-	var sessionProperties : GameSessionProperties = GameSessionProperties.new(10)
-	var session : GameSession = GameSession.new(sessionProperties)
+	print("---STARTING GAME LOOP---")
+	
+	var sessionProperties : GameSessionProperties = GameSessionProperties.new(5, 10)
+	session = GameSession.new(sessionProperties)
+	
+	scheduler = RandomScheduler.new(session.customers)
 	
 	session.sessionStarted.connect(onSessionStarted)
 	session.stateChanged.connect(onSessionStateChanged)
 	
 	session.Start()
 	
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
 	pass
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("DebugNextState"):
+		session.NextState()
 
 func onSessionStarted() -> void:
 	print("Session started")
 	
 func onSessionStateChanged(newState : GameSession.GameState) -> void:
-	print("Session changed State: " + str(newState))
+	print("Session changed State: " + GameSession.GameState.keys()[newState])
+	
+	match newState:
+		GameSession.GameState.WaitingForCustomer:
+			session.SetCurrentCustomer(scheduler.Next())
+			print("Customer " + str(session.currentCustomer.id) + " is entering the shop")
