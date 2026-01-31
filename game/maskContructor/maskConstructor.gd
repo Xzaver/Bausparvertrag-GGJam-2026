@@ -45,11 +45,6 @@ func clearBuilder():
 func renderMask(maskData:MaskData):
 	print("Render Mask ")
 	
-	match mas
-	
-	match maskData:
-		maskData.eyes
-	
 	pass
 
 func ReceiveMask(maskdatafrommanager:MaskData):
