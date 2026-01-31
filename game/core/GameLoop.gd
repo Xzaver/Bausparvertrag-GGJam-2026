@@ -6,7 +6,7 @@ var scheduler : Scheduler
 
 func _ready() -> void:
 	print("---STARTING GAME LOOP---")
-	var sessionProperties : GameSessionProperties = GameSessionProperties.new(5, 10)
+	var sessionProperties : GameSessionProperties = GameSessionProperties.GetDifficultyProperties(GameSessionProperties.Difficulty.MEDIUM)
 	session = GameSession.new(sessionProperties)
 	
 	scheduler = RandomScheduler.new(session.customers)
