@@ -24,6 +24,18 @@ func SetGameState(state: GameState) -> void:
 	currentGameState = state
 	emit_signal("stateChanged", currentGameState)
 	
+func NextState() -> GameState:
+	var newState = currentGameState
+	
+	if currentGameState == GameState.FinalizeCustomer:
+		newState = 0
+	else:
+		newState += 1
+	
+	SetGameState(newState)
+	
+	return currentGameState
+	
 func rand_int(min_val: int, max_val: int) -> int:
 	return min_val + (randi() % (max_val - min_val + 1))
 	
