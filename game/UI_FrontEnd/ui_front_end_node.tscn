@@ -140,11 +140,13 @@ custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "Shape1"
+text = "EYE
+SAD"
 script = ExtResource("2_h7x47")
 mesh_container = NodePath("SubViewportContainer/SubViewport/Node3D/MeshContainer")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape1" unique_id=845427434]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -163,7 +165,7 @@ mouse_filter = 2
 own_world_3d = true
 handle_input_locally = false
 size = Vector2i(125, 125)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Node3D" type="Node3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape1/SubViewportContainer/SubViewport" unique_id=1206232906]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
@@ -203,6 +205,7 @@ script = ExtResource("2_h7x47")
 mesh_container = NodePath("SubViewportContainer/SubViewport/Node3D/MeshContainer")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2" unique_id=1458851640]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -221,7 +224,7 @@ mouse_filter = 2
 own_world_3d = true
 handle_input_locally = false
 size = Vector2i(125, 125)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Node3D" type="Node3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport" unique_id=975368529]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
@@ -261,6 +264,7 @@ script = ExtResource("2_h7x47")
 mesh_container = NodePath("SubViewportContainer/SubViewport/Node3D/MeshContainer")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape3" unique_id=1859089391]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -279,7 +283,7 @@ mouse_filter = 2
 own_world_3d = true
 handle_input_locally = false
 size = Vector2i(125, 125)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Node3D" type="Node3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape3/SubViewportContainer/SubViewport" unique_id=718630080]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
@@ -319,6 +323,7 @@ script = ExtResource("2_h7x47")
 mesh_container = NodePath("SubViewportContainer/SubViewport/Node3D/MeshContainer")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape4" unique_id=190456303]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -337,7 +342,7 @@ mouse_filter = 2
 own_world_3d = true
 handle_input_locally = false
 size = Vector2i(125, 125)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Node3D" type="Node3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape4/SubViewportContainer/SubViewport" unique_id=300287521]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)

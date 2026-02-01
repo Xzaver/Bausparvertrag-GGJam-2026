@@ -2,67 +2,28 @@ extends Control
 """
 UI Manager – handles shape selection, preview and confirmation.
 """
+const SLOT_SEQUENCE := [
+	MaskComponent.SLOT.EYES,
+	MaskComponent.SLOT.MOUTH,
+	MaskComponent.SLOT.TOP,
+	MaskComponent.SLOT.SHAPE,
+]
+var current_slot_index: int = 0
 
-# ==================================================
-# UI Frontend – Public API (for external systems)
-# ==================================================
-#
-# The following methods are intended to be called
-# from outside the UIManager (e.g. GameLogic, Debug,
-# Editor tools).
-#
-# --------------------------------------------------
-# Selection / State
-# --------------------------------------------------
-#
-# set_mesh_for_all_buttons(source)
-# - Replaces the preview meshes of ALL ShapeButtons.
-# - `source` can be:
-#     - Node3D            (uses its MeshInstance3D children)
-#     - MeshInstance3D   (single mesh)
-#     - Array[MeshInstance3D]
-#
-#
-# --------------------------------------------------
-# Debug / Preview
-# --------------------------------------------------
-#
-# apply_active_shape_to_debug_container()
-# - Copies the currently active ShapeButton preview
-#   into the DebugMeshContainer.
-#
-# debug_apply_active_shape_to_all_buttons()
-# - Debug-only helper.
-# - Applies the currently active ShapeButton preview
-#   to ALL button mesh containers.
-#
-#
-# --------------------------------------------------
-# Signals to listen to (preferred over direct access)
-# --------------------------------------------------
-#
-# shape_selected(index)
-# - Emitted when a ShapeButton is clicked.
-#
-# color_selected(color)
-# - Emitted when the ColorPicker value changes.
-#
-# next_requested
-# - Emitted when the Next button is pressed.
-#
-# selection_confirmed(shape_index, mesh_container, color)
-# - Final selection payload.
-# - External systems should use THIS signal.
-#
-#
-# --------------------------------------------------
-# Rules for External Usage
-# --------------------------------------------------
-# - Do NOT access shape_buttons directly.
-# - Do NOT re-parent meshes owned by the UI.
-# - Always react via signals where possible.
-# ==================================================
 
+const SLOT_LABELS := {
+	MaskComponent.SLOT.EYES: "EYES",
+	MaskComponent.SLOT.MOUTH: "MOUTH",
+	MaskComponent.SLOT.TOP: "TOP",
+	MaskComponent.SLOT.SHAPE: "SHAPE",
+}
+
+const EMOTION_LABELS := {
+	MaskComponent.EMOTIONS.SAD: "SAD",
+	MaskComponent.EMOTIONS.HAPPY: "HAPPY",
+	MaskComponent.EMOTIONS.ANGRY: "ANGRY",
+	MaskComponent.EMOTIONS.CUTE: "CUTE",
+}
 
 
 # ==================================================
@@ -70,6 +31,12 @@ UI Manager – handles shape selection, preview and confirmation.
 # ==================================================
 const DEBUG_SIGNALS := true
 
+signal mask_process_finished(selections: Dictionary)
+
+var mask_selections: Dictionary = {}
+var mask_process_completed: bool = false
+
+signal simple_mask_selection(data: Dictionary)
 
 signal shape_selected(index: int)
 signal next_requested
@@ -79,6 +46,21 @@ signal selection_confirmed(
 	mesh_container: Node3D,
 	color: Color
 )
+signal mask_selection_changed(
+	slot: MaskComponent.SLOT,
+	emotion: MaskComponent.EMOTIONS,
+	color: Color
+)
+
+
+# 
+# SINGAL Masken Config process abgeschlossen -> der kommt dann wenn man durch alle EMotions und shapes durch ist
+# SINGAL COlor
+# SINGAL Dict emotion slot
+# SIgnal maskcomponentSlot, MaskCmponent.Emotions 
+
+#Xaver — 09:40Sunday, 1 February 2026 09:40
+#func updateMaskProperty(slot:MaskComponent.SLOT,emotion:MaskComponent.EMOTIONS):
 
 
 @export var debug_mesh_instance: MeshInstance3D
@@ -109,12 +91,48 @@ var active_shape_index: int = -1
 func _ready() -> void:
 	_connect_click_events()
 
+	# 🔁 Selbst-Listener
+	self.mask_process_finished.connect(_on_mask_process_finished)
+
+	# Initiale Iteration
+	set_mask_text_for_iteration(SLOT_SEQUENCE[current_slot_index])
+
 	if color_picker:
 		color_picker.color_changed.connect(_on_color_changed)
 
 	if debug_apply_all_button:
 		debug_apply_all_button.pressed.connect(_on_debug_apply_all_pressed)
-		
+
+
+func _to_one_based(value: int) -> int:
+	return value + 1
+
+func _on_mask_process_finished(selections: Dictionary) -> void:
+	if DEBUG_SIGNALS:
+		print("[UI] Resetting mask process")
+
+	_reset_mask_process()
+
+func _reset_mask_process() -> void:
+	# Prozess-Status
+	mask_process_completed = false
+	current_slot_index = 0
+	active_shape_index = -1
+
+	# Selections löschen
+	mask_selections.clear()
+
+	# UI zurücksetzen
+	set_mask_text_for_iteration(SLOT_SEQUENCE[current_slot_index])
+
+	# Optional: Debug-Mesh leeren
+	if debug_mesh_container:
+		for child in debug_mesh_container.get_children():
+			child.queue_free()
+
+	# Optional: Next wieder aktivieren
+	if next_button:
+		next_button.disabled = false
 
 
 func _on_debug_apply_all_pressed() -> void:
@@ -150,22 +168,100 @@ func _connect_click_events() -> void:
 
 	if next_button:
 		next_button.pressed.connect(_on_next_button_clicked)
-
-
-
+		
 func _on_shape_button_clicked(index: int) -> void:
 	active_shape_index = index
 
-	if DEBUG_SIGNALS:
-		print("[UI][SIGNAL] shape_selected | index =", index)
+	var slot: MaskComponent.SLOT = SLOT_SEQUENCE[current_slot_index]
+	var emotion: MaskComponent.EMOTIONS = _emotion_from_button_index(index)
+	var color: Color = selected_color
 
+	# ==================================================
+	# State speichern (für Final-Payload)
+	# ==================================================
+	mask_selections[slot] = {
+		"slot": slot,
+		"emotion": emotion,
+		"shape_index": index,
+		"color": color,
+	}
+
+	# ==================================================
+	# SIGNAL 1: mask_selection_changed (Enum + Color)
+	# ==================================================
+	if DEBUG_SIGNALS:
+		print(
+			"[UI][SIGNAL] mask_selection_changed |",
+			"slot =", slot,
+			"| emotion =", emotion,
+			"| color =", color
+		)
+
+	emit_signal("mask_selection_changed", slot, emotion, color)
+
+	# ==================================================
+	# SIGNAL 2: simple_mask_selection (1–4 / 1–4)
+	# ==================================================
+	var simple_payload := {
+		"emotion": emotion + 1, # Enum (0–3) → 1–4
+		"shape": index + 1     # Index (0–3) → 1–4
+	}
+
+	if DEBUG_SIGNALS:
+		print(
+			"[UI][SIGNAL] simple_mask_selection |",
+			"emotion =", simple_payload["emotion"],
+			"| shape =", simple_payload["shape"]
+		)
+
+	emit_signal("simple_mask_selection", simple_payload)
+
+	# ==================================================
+	# SIGNAL 3: updateMaskProperty (Domain-Signal)
+	# ==================================================
+	if DEBUG_SIGNALS:
+		print(
+			"[UI][SIGNAL] updateMaskProperty |",
+			"slot =", slot,
+			"| emotion =", emotion
+		)
+
+	emit_signal("updateMaskProperty", slot, emotion)
+
+	# ==================================================
+	# UI / Debug
+	# ==================================================
 	apply_active_shape_to_debug_container()
+
+	if DEBUG_SIGNALS:
+		print(
+			"[UI][SIGNAL] shape_selected |",
+			"shape_index =", index
+		)
+
 	emit_signal("shape_selected", index)
 
 
-
-	
 func _on_next_button_clicked() -> void:
+	# ⛔ Guard: Prozess ist bereits abgeschlossen
+	if mask_process_completed:
+		return
+
+	current_slot_index += 1
+
+	if current_slot_index >= SLOT_SEQUENCE.size():
+		mask_process_completed = true
+
+		if DEBUG_SIGNALS:
+			print("[UI][SIGNAL] mask_process_finished")
+
+		emit_signal("mask_process_finished", mask_selections)
+		return
+
+	# Slot-Wechsel normal
+	active_shape_index = -1
+	set_mask_text_for_iteration(SLOT_SEQUENCE[current_slot_index])
+
 	if DEBUG_SIGNALS:
 		print(
 			"[UI][SIGNAL] next_requested | active_shape_index =",
@@ -173,30 +269,6 @@ func _on_next_button_clicked() -> void:
 			"| color =",
 			selected_color
 		)
-
-	if active_shape_index < 0:
-		push_warning("[UI] Next pressed without shape selection")
-		return
-
-	var container := shape_buttons[active_shape_index].mesh_container
-	if container == null:
-		push_warning("[UI] Selected shape has no mesh_container")
-		return
-
-	if DEBUG_SIGNALS:
-		print(
-			"[UI][DEBUG] Next payload →",
-			"index =", active_shape_index,
-			"| container =", container.name,
-			"| mesh_count =", container.get_child_count()
-		)
-
-	emit_signal(
-		"selection_confirmed",
-		active_shape_index,
-		container,
-		selected_color
-	)
 
 	emit_signal("next_requested")
 
@@ -249,19 +321,72 @@ func set_mesh_for_all_buttons(source) -> void:
 	if DEBUG_SIGNALS:
 		print("[UI][DEBUG] set_mesh_for_all_buttons applied")
 
+
+# ==================================================
+# SET TEXTs
+# ==================================================
+
+# UIManager.gd
+
+func set_mask_text_for_iteration(slot: MaskComponent.SLOT) -> void:
+	var slot_text: String = SLOT_LABELS.get(slot, "UNKNOWN")
+	var emotions := MaskComponent.EMOTIONS.values()
+	var color_text := _color_to_hex(selected_color)
+
+	for i in range(shape_buttons.size()):
+		if i >= emotions.size():
+			break
+
+		var emotion: MaskComponent.EMOTIONS = emotions[i]
+		var emotion_text: String = EMOTION_LABELS.get(emotion, "UNKNOWN")
+
+		shape_buttons[i].set_label(
+			"%s\n%s\n%s" % [slot_text, emotion_text, color_text]
+		)
+
+
+
+
+# ==================================================
+# COLOR PICKER
+# ==================================================
+func _emotion_from_button_index(index: int) -> MaskComponent.EMOTIONS:
+	var emotions := MaskComponent.EMOTIONS.values()
+
+	if index < 0 or index >= emotions.size():
+		push_warning("[UI] Invalid button index for emotion:", index)
+		return emotions[0] as MaskComponent.EMOTIONS
+
+	return emotions[index] as MaskComponent.EMOTIONS
+
+
+
+
+
 # ==================================================
 # COLOR PICKER
 # ==================================================
 
 
+func _color_to_hex(color: Color) -> String:
+	var r := int(color.r * 255.0)
+	var g := int(color.g * 255.0)
+	var b := int(color.b * 255.0)
+	return "#%02X%02X%02X" % [r, g, b]
+
+
 func _on_color_changed(color: Color) -> void:
 	selected_color = color
 
-	if DEBUG_SIGNALS:
-		print("[UI][SIGNAL] color_selected =", color)
-
 	apply_color_to_all_meshes(color)
+
+	# ⬇️ NEU: Button-Texte live aktualisieren
+	set_mask_text_for_iteration(SLOT_SEQUENCE[current_slot_index])
+
 	emit_signal("color_selected", color)
+
+
+
 
 
 	
