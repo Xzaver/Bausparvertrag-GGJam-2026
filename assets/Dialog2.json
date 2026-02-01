@@ -1,0 +1,35 @@
+
+[
+	{"type":"intro","cult":"plant","id":1, "content": "Hi, I need a mask, I can't be part of them without one."},
+	{"type":"intro","cult":"plant","id":2, "content": "I've heard you're a natural at making masks. Can you help me?"},
+	{"type":"intro","cult":"plant","id":3, "content": "Could you help me look like i'm blooming"},
+	{"type":"intro","cult":"animal","id":1, "content":  "HIII, heard that you sell super cool masks, could i maybe have one too?"},
+	{"type":"intro","cult":"animal","id":2, "content":  "Aren't you the one that makes those colorful masks? Would you please make me one?"},
+	{"type":"intro","cult":"animal","id":3, "content":  "Could I... Could I please have a mask?"},
+	{"type":"intro","cult":"shoe","id":1, "content": "Need somethin'. Could ya help me get sorted?"},
+	{"type":"intro","cult":"shoe","id":2, "content": "Small one, need a mask from ya. Can ya do it?"},
+	{"type":"intro","cult":"shoe","id":3, "content": "Hey hey hey, friend! Need a new look. Mind helping me?"},
+	{"type":"intro","cult":"lamp","id":1, "content": "Good day! I intend to purchase one of your masks."},
+	{"type":"intro","cult":"lamp","id":2, "content": "I would like to inquire about your availability. I would like to purchase a mask."},
+	{"type":"intro","cult":"lamp","id":3, "content": "Nice shop you have here. Would it be possible, perchance, for you to help me?"},
+
+	{"repair_plant_1": "Hey there, sorry to bother you but sadly it this mask can't grow itself back together."},
+	{"repair_plant_2": "Hello, I tried it with letting it stay in the sun, but I think you have to fix the mask for me."},
+	{"repair_plant_3": "It seems I forgot to take care of the mask like I do with my cacti, could you repair it?"},
+	{"repair_animal_1": "Hewwo, I broke my super cool mask, totally by accident, could you repair it pretty pleaseee???"},
+	{"repair_animal_2": "Pushed it down the table, now mask neeeds fixi pleaaassee?"},
+	{"repair_animal_3": "A piece went missing when I wasn't looking, could you make it be on the mask again?"},
+	{"repair_shoe_1": "Ey there, could you fix this up for me!"},
+	{"repair_shoe_2": "Oy, mask maker, need fixing for this!"},
+	{"repair_shoe_3": "Mask dude, this needs fix, go do that!"},
+	{"repair_lamp_1": "I beg your pardon, it seems that my mask happens to be in an unacceptable condition, could you take a look at it?"},
+	{"repair_lamp_2": "I am sorry to bother you, but I have the urgent intro for you to set this item into its former state."},
+	{"repair_lamp_3": "My asset is in dire need of an overhaul, please see to that."},
+
+
+	{"win_plant": "The plant cult grew so big that the world is overgrown. Everything is full of plants and you cant go anywhere anymore without a way through the undergrowth. On the good side tho, CO2 induced climate change is no more and wooden masks are cheaper to produce"},
+	{"win_animal": "Animals are on the loose, nobody is distinguishing between 'people' and 'animals anymore. Your customer variety is growing immensively and you profit a lot"},
+	{"win_shoe": "The shoe cult is at power, shoes are a must now. Walking barefoot is a crime, and masks are being replaced with shoes as hats. You kinda played yourself"},
+	{"win_lamp": "The cult of the lamp managed to hide the light of sun, making it necessary to buy lamps from them. Masks containing a light source are especially profitable lately"},
+	{"win_all": "IT IS CHAOS. The wolrd is burning and unlike anything you knew before. The different cults are fighting each other causing everything to collapse. Masks particulary are in hype it seems."}
+]
