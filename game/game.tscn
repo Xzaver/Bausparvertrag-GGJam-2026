@@ -31,6 +31,9 @@
 [ext_resource type="PackedScene" uid="uid://d2gy4h2xavbbm" path="res://assets/maskComponents/new/top/TOP_CUTE.tscn" id="22_hbvmx"]
 [ext_resource type="PackedScene" uid="uid://b0eta67emrci2" path="res://game/challenges/TextGenerator.tscn" id="29_58yx1"]
 [ext_resource type="JSON" path="res://assets/Dialog2.json" id="30_hbvmx"]
+[ext_resource type="AudioStream" uid="uid://cmgufr56dddlp" path="res://assets/music/intro.wav" id="32_posua"]
+[ext_resource type="AudioStream" uid="uid://dsxieo5tawn86" path="res://assets/music/loop.wav" id="33_gvtgv"]
+[ext_resource type="AudioStream" uid="uid://caeym1poh6e7r" path="res://assets/music/tail.wav" id="34_5ywmu"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_b686c"]
 panorama = ExtResource("2_vsp63")
@@ -105,6 +108,24 @@ _data = {
 &"enter": SubResource("Animation_ee6o4"),
 &"leave": SubResource("Animation_4cobl")
 }
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_fegy3"]
+stream_count = 2
+stream_0/stream = ExtResource("33_gvtgv")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("34_5ywmu")
+stream_1/volume = 0.0
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_pvdu1"]
+clip_count = 2
+clip_0/name = &"Intro"
+clip_0/stream = ExtResource("32_posua")
+clip_0/auto_advance = 1
+clip_0/next_clip = 1
+clip_1/name = &"Loop"
+clip_1/stream = SubResource("AudioStreamSynchronized_fegy3")
+clip_1/auto_advance = 1
+clip_1/next_clip = 1
 
 [node name="Game" type="Node3D" unique_id=1891684557]
 script = ExtResource("1_l1rk1")
@@ -248,6 +269,11 @@ shaded = true
 [node name="TextGenerator" parent="." unique_id=1622416483 node_paths=PackedStringArray("label") instance=ExtResource("29_58yx1")]
 label = NodePath("../UI_FrontEnd_Node/TextBubble/RichTextLabel")
 dialogue = ExtResource("30_hbvmx")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1157926620]
+stream = SubResource("AudioStreamInteractive_pvdu1")
+volume_db = -1.0
+autoplay = true
 
 [connection signal="mask_process_finished" from="UI_FrontEnd_Node" to="MaskConstructor" method="FinalizeConstruct"]
 [connection signal="mask_selection_changed" from="UI_FrontEnd_Node" to="MaskConstructor" method="updateMaskProperty"]
