@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://bnrxnql6oypuq"]
-
-[ext_resource type="PackedScene" uid="uid://lquv1vx3ouvu" path="res://game/maskComponent/maskComponent.tscn" id="1_kb1ak"]
-
-[node name="eyesCUTE" type="Node" unique_id=1257823327]
-
-[node name="MaskComponent" parent="." unique_id=121624849 instance=ExtResource("1_kb1ak")]
-emotions = 3

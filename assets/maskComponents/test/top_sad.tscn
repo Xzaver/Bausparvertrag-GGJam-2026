@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://sq453twg2h0l"]
-
-[ext_resource type="PackedScene" uid="uid://lquv1vx3ouvu" path="res://game/maskComponent/maskComponent.tscn" id="1_7ghnk"]
-
-[node name="topSAD" type="Node" unique_id=493998276]
-
-[node name="MaskComponent" parent="." unique_id=121624849 instance=ExtResource("1_7ghnk")]
-slot = 2
