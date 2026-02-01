@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://cd1a0ufvbeexe" path="res://game/core/GameLoop.tscn" id="2_h7iqs"]
 [ext_resource type="Texture2D" uid="uid://bj0mmrjfbhbfh" path="res://assets/sky/meadow_2k.hdr" id="2_vsp63"]
 [ext_resource type="PackedScene" uid="uid://bocv7txk50p4d" path="res://game/maskContructor/maskConstructor.tscn" id="3_4fuuu"]
-[ext_resource type="PackedScene" path="res://game/challenges/ChallengeManager.tscn" id="3_b686c"]
-[ext_resource type="PackedScene" uid="uid://b58x45a0d3rf8" path="res://game/ScoreKeeper/ScoreKeeper.tscn" id="3_hb504"]
+[ext_resource type="PackedScene" uid="uid://bv1l4n3rbgv53" path="res://game/challenges/ChallengeManager.tscn" id="3_b686c"]
+[ext_resource type="PackedScene" path="res://game/ScoreKeeper/ScoreKeeper.tscn" id="3_hb504"]
 [ext_resource type="PackedScene" uid="uid://ci7lkqfsb37wk" path="res://assets/maskComponents/new/eyes/EYES_SAD.tscn" id="4_qf6n1"]
 [ext_resource type="PackedScene" uid="uid://dqb5huwrc4ohg" path="res://game/UI_FrontEnd/ui_front_end_node.tscn" id="5_dakft"]
 [ext_resource type="PackedScene" uid="uid://bk0qm484ny6gm" path="res://assets/levelCompononents/Room/Room.gltf" id="5_dxrkv"]
@@ -15,7 +15,19 @@
 [ext_resource type="PackedScene" uid="uid://cesojvhgn8hmi" path="res://assets/levelCompononents/Sad_Mouth/Sad_Mouth.gltf" id="6_l8g03"]
 [ext_resource type="PackedScene" uid="uid://caop6s06g4pib" path="res://assets/maskComponents/new/shape/SHAPE_Universal.tscn" id="7_hb504"]
 [ext_resource type="PackedScene" uid="uid://ci16vrxn4s8mr" path="res://assets/levelCompononents/Mask_Shape/Mask_Shape.gltf" id="7_j8tme"]
+[ext_resource type="PackedScene" uid="uid://b3d3wwcsf01xg" path="res://assets/maskComponents/new/eyes/EYES_HAPPY.tscn" id="8_leid8"]
+[ext_resource type="PackedScene" uid="uid://dgc4kijbqc7lf" path="res://assets/maskComponents/new/eyes/EYES_ANGRY.tscn" id="9_8bboj"]
+[ext_resource type="PackedScene" uid="uid://c7hds4mxpwrfb" path="res://assets/maskComponents/new/eyes/EYES_CUTE.tscn" id="10_q52ks"]
+[ext_resource type="PackedScene" uid="uid://c6otpdk8hbiwv" path="res://assets/maskComponents/new/mouth/MOUTH_HAPPY.tscn" id="12_jucfl"]
+[ext_resource type="PackedScene" uid="uid://clkxewv5opitf" path="res://assets/maskComponents/new/mouth/MOUTH_ANGRY.tscn" id="13_jdpby"]
+[ext_resource type="PackedScene" uid="uid://co8u2jioi15nc" path="res://assets/maskComponents/new/mouth/MOUTH_CUTE.tscn" id="14_58yx1"]
 [ext_resource type="PackedScene" uid="uid://liv1n0jvg6vo" path="res://game/CustomerDoll/CustomerDoll.tscn" id="16_ee6o4"]
+[ext_resource type="PackedScene" uid="uid://ivmrgicck0nb" path="res://assets/maskComponents/new/shape/SHAPE_HAPPY.tscn" id="16_hbvmx"]
+[ext_resource type="PackedScene" uid="uid://d4nngb2xp6jwr" path="res://assets/maskComponents/new/shape/SHAPE_ANGRY.tscn" id="17_fegy3"]
+[ext_resource type="PackedScene" uid="uid://vh083ldj5qao" path="res://assets/maskComponents/new/shape/SHAPE_CUTE.tscn" id="18_pvdu1"]
+[ext_resource type="PackedScene" uid="uid://c3o307eckbrfl" path="res://assets/maskComponents/new/top/TOP_HAPPY.tscn" id="20_jdpby"]
+[ext_resource type="PackedScene" uid="uid://5byptxpasfx8" path="res://assets/maskComponents/new/top/TOP_ANGRY.tscn" id="21_58yx1"]
+[ext_resource type="PackedScene" uid="uid://d2gy4h2xavbbm" path="res://assets/maskComponents/new/top/TOP_CUTE.tscn" id="22_hbvmx"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_b686c"]
 panorama = ExtResource("2_vsp63")
@@ -103,12 +115,8 @@ environment = SubResource("Environment_dakft")
 
 [node name="ChallengeManager" parent="." unique_id=2007542354 instance=ExtResource("3_b686c")]
 
-[node name="GameSession" parent="." unique_id=247687767 node_paths=PackedStringArray("maskBuilder", "challengeManager", "scoreKeeper", "ui", "customerDoll") instance=ExtResource("2_h7iqs")]
+[node name="GameSession" parent="." unique_id=247687767 node_paths=PackedStringArray("maskBuilder") instance=ExtResource("2_h7iqs")]
 maskBuilder = NodePath("../MaskConstructor")
-challengeManager = NodePath("../ChallengeManager")
-scoreKeeper = NodePath("../ScoreKeeper")
-ui = NodePath("../UI_FrontEnd_Node")
-customerDoll = NodePath("../CustomerDoll")
 
 [node name="MaskConstructor" parent="." unique_id=1958036344 node_paths=PackedStringArray("eyePosRef", "mouthPosRef", "topPosRef", "shapePosRef", "maskRoot") instance=ExtResource("3_4fuuu")]
 eyePosRef = NodePath("../Workbench/MaskConstruct/EyesOrig")
@@ -116,21 +124,21 @@ mouthPosRef = NodePath("../Workbench/MaskConstruct/MouthOrig")
 topPosRef = NodePath("../Workbench/MaskConstruct/TopOrig")
 shapePosRef = NodePath("../Workbench/MaskConstruct/ShapeOrig")
 eye_SAD = ExtResource("4_qf6n1")
-eye_HAPPY = ExtResource("5_vsp63")
-eye_ANGRY = ExtResource("6_b686c")
-eye_CUTE = ExtResource("4_qf6n1")
+eye_HAPPY = ExtResource("8_leid8")
+eye_ANGRY = ExtResource("9_8bboj")
+eye_CUTE = ExtResource("10_q52ks")
 mouth_SAD = ExtResource("6_b686c")
-mouth_HAPPY = ExtResource("4_qf6n1")
-mouth_ANGRY = ExtResource("6_b686c")
-mouth_CUTE = ExtResource("5_vsp63")
-top_SAD = ExtResource("5_vsp63")
-top_HAPPY = ExtResource("4_qf6n1")
-top_ANGRY = ExtResource("6_b686c")
-top_CUTE = ExtResource("5_vsp63")
-shape_SAD = ExtResource("7_hb504")
-shape_HAPPY = ExtResource("7_hb504")
-shape_ANGRY = ExtResource("7_hb504")
-shape_CUTE = ExtResource("7_hb504")
+mouth_HAPPY = ExtResource("12_jucfl")
+mouth_ANGRY = ExtResource("13_jdpby")
+mouth_CUTE = ExtResource("14_58yx1")
+top_SAD = ExtResource("7_hb504")
+top_HAPPY = ExtResource("16_hbvmx")
+top_ANGRY = ExtResource("17_fegy3")
+top_CUTE = ExtResource("18_pvdu1")
+shape_SAD = ExtResource("5_vsp63")
+shape_HAPPY = ExtResource("20_jdpby")
+shape_ANGRY = ExtResource("21_58yx1")
+shape_CUTE = ExtResource("22_hbvmx")
 maskRoot = NodePath("../Workbench/MaskConstruct/ShapeOrig/Final")
 
 [node name="Room" parent="." unique_id=628620454 instance=ExtResource("5_dxrkv")]
