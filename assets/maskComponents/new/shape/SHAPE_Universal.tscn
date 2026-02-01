@@ -7,7 +7,6 @@
 
 [node name="MaskComponent" type="Node3D" parent="." unique_id=897226220 node_paths=PackedStringArray("colorizeableMeshes")]
 script = ExtResource("1_h5dbh")
-slot = 3
 colorizeableMeshes = [NodePath("Mask_Shape/Mask_Shape_01")]
 metadata/_custom_type_script = "uid://cshjpferrlj2n"
 
