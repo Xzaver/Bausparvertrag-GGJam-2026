@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://ivmrgicck0nb"]
+
+[ext_resource type="Script" uid="uid://cshjpferrlj2n" path="res://game/maskComponent/MaskComponent.gd" id="1_5socj"]
+[ext_resource type="PackedScene" uid="uid://c8ixdbsuola" path="res://assets/levelCompononents/Mask_Shape_02/Mask_Shape_02.gltf" id="2_wtvr4"]
+
+[node name="ShapeHappy" type="Node3D" unique_id=586202816]
+
+[node name="MaskComponent" type="Node3D" parent="." unique_id=74687208 node_paths=PackedStringArray("colorizeableMeshes")]
+script = ExtResource("1_5socj")
+colorizeableMeshes = [NodePath("Mask_Shape_022/Mask_Shape_02")]
+metadata/_custom_type_script = "uid://cshjpferrlj2n"
+
+[node name="Mask_Shape_022" parent="MaskComponent" unique_id=465686848 instance=ExtResource("2_wtvr4")]
+
+[editable path="MaskComponent/Mask_Shape_022"]

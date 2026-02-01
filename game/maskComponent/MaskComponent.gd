@@ -8,7 +8,7 @@ enum SLOT {
 	TOP = 2,
 	SHAPE = 3,
 	}
-@export var slot:SLOT
+#@export var slot:SLOT
 
 enum EMOTIONS {
 	SAD = 0,
@@ -16,7 +16,7 @@ enum EMOTIONS {
 	ANGRY = 2,
 	CUTE = 3,
 	}
-@export var emotions:EMOTIONS
+#@export var emotions:EMOTIONS
 
 @export var colorizeableMeshes :Array[MeshInstance3D] = []
 	

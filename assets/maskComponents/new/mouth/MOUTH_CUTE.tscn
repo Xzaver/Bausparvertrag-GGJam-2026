@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://co8u2jioi15nc"]
+
+[ext_resource type="Script" uid="uid://cshjpferrlj2n" path="res://game/maskComponent/MaskComponent.gd" id="1_3x8ql"]
+[ext_resource type="PackedScene" uid="uid://bj7ue8atovmlg" path="res://assets/levelCompononents/Cute_Mouth/Cute_Mouth.gltf" id="2_sxj7y"]
+
+[node name="MouthCute" type="Node3D" unique_id=1462820463]
+
+[node name="MaskComponent" type="Node3D" parent="." unique_id=339302187 node_paths=PackedStringArray("colorizeableMeshes")]
+script = ExtResource("1_3x8ql")
+colorizeableMeshes = [NodePath("Cute_Mouth2/Cute_Mouth/Mouth_Cute")]
+metadata/_custom_type_script = "uid://cshjpferrlj2n"
+
+[node name="Cute_Mouth2" parent="MaskComponent" unique_id=1325553333 instance=ExtResource("2_sxj7y")]
+
+[editable path="MaskComponent/Cute_Mouth2"]

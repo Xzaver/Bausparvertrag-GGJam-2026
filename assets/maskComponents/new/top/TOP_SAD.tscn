@@ -1,16 +1,15 @@
 [gd_scene format=3 uid="uid://byl5kuihvsu8n"]
 
 [ext_resource type="Script" uid="uid://cshjpferrlj2n" path="res://game/maskComponent/MaskComponent.gd" id="1_1ua6m"]
-[ext_resource type="PackedScene" uid="uid://rsqy8jlewifb" path="res://assets/levelCompononents/Happy_Eyes/Happy_eyes.gltf" id="2_1ua6m"]
+[ext_resource type="PackedScene" uid="uid://bt1fdy1i1w7q5" path="res://assets/levelCompononents/cheese/Cheese.gltf" id="2_8u5mc"]
 
 [node name="EyesSad" type="Node3D" unique_id=1796902024]
 
 [node name="MaskComponent" type="Node3D" parent="." unique_id=1412613812 node_paths=PackedStringArray("colorizeableMeshes")]
 script = ExtResource("1_1ua6m")
-slot = 2
-colorizeableMeshes = [NodePath("Happy_eyes2/Happy_eyes/Happy_eye")]
+colorizeableMeshes = [NodePath("Cheese/cheese")]
 metadata/_custom_type_script = "uid://cshjpferrlj2n"
 
-[node name="Happy_eyes2" parent="MaskComponent" unique_id=549451956 instance=ExtResource("2_1ua6m")]
+[node name="Cheese" parent="MaskComponent" unique_id=1731720273 instance=ExtResource("2_8u5mc")]
 
-[editable path="MaskComponent/Happy_eyes2"]
+[editable path="MaskComponent/Cheese"]
