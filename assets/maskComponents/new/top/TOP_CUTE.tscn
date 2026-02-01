@@ -11,5 +11,6 @@ colorizeableMeshes = [NodePath("Cat_ears2/Cat_ears")]
 metadata/_custom_type_script = "uid://cshjpferrlj2n"
 
 [node name="Cat_ears2" parent="MaskComponent" unique_id=1833798199 instance=ExtResource("2_h7yns")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.011210829)
 
 [editable path="MaskComponent/Cat_ears2"]
