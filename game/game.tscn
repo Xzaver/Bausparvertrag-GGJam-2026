@@ -263,6 +263,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.227514, 1.0380096, 0.18708
 libraries/ = SubResource("AnimationLibrary_ln7ps")
 
 [node name="Sprite3D" parent="CustomerDoll/Path3D/PathFollow3D" parent_id_path=PackedInt32Array(285034977, 418750148) index="0" unique_id=849827817]
+transform = Transform3D(-6.5567085e-09, 0, 0.15, 0, 0.15, 0, -0.15, 0, -6.5567085e-09, 0, 0.62221193, 0)
 gi_mode = 2
 shaded = true
 
