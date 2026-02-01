@@ -29,7 +29,7 @@ var currentMaskData :MaskData
 @export var top_HAPPY :PackedScene 
 @export var top_ANGRY :PackedScene 
 @export var top_CUTE :PackedScene
- 
+
 @export_group("shape")
 @export var shape_SAD :PackedScene
 @export var shape_HAPPY :PackedScene 
@@ -52,6 +52,11 @@ var instanced_mouth :Node3D
 var instanced_top :Node3D
 var instanced_shape :Node3D
 
+var colorizeable_EYES :Array[MeshInstance3D]
+var colorizeable_MOUTH :Array[MeshInstance3D]
+var colorizeable_TOP :Array[MeshInstance3D]
+var colorizeable_SHAPE :Array[MeshInstance3D]
+
 func _ready() -> void:
 		
 	eyePos = eyePosRef.global_position
@@ -71,13 +76,17 @@ func renderMask(maskData:MaskData):
 	clearBuilder()
 	
 	instanced_eyes = PlaceSceneToSlot(MaskComponent.SLOT.EYES, GetEmotionEyes(maskData.eyes))
-	getMeshestoChangeColor(instanced_eyes)
+	colorizeable_EYES = getMeshestoChangeColor(instanced_eyes)
+	
 	instanced_mouth = PlaceSceneToSlot(MaskComponent.SLOT.MOUTH, GetEmotionMouth(maskData.mouth))
-	getMeshestoChangeColor(instanced_mouth)
+	colorizeable_MOUTH = getMeshestoChangeColor(instanced_mouth)
+	
 	instanced_top = PlaceSceneToSlot(MaskComponent.SLOT.TOP, GetEmotionTop(maskData.top))
-	getMeshestoChangeColor(instanced_top)
+	colorizeable_TOP = getMeshestoChangeColor(instanced_top)
+	
 	instanced_shape = PlaceSceneToSlot(MaskComponent.SLOT.SHAPE, GetEmotionShape(maskData.shape))
-	getMeshestoChangeColor(instanced_shape)
+	colorizeable_SHAPE = getMeshestoChangeColor(instanced_shape)
+	
 
 func GetEmotionEyes(emotion : MaskComponent.EMOTIONS) -> PackedScene:
 	match emotion:
@@ -158,24 +167,32 @@ func ReceiveMask(maskdatafrommanager:MaskData):
 		currentMaskData = maskdatafrommanager
 		renderMask(currentMaskData)
 
-func updateMaskProperty(slot:MaskComponent.SLOT,emotion:MaskComponent.EMOTIONS):
+func updateMaskProperty(slot:MaskComponent.SLOT,emotion:MaskComponent.EMOTIONS,colorToChange:Color):
 	
 	match slot:
 		MaskComponent.SLOT.EYES:
 			currentMaskData.eyes = emotion
 			renderMask(currentMaskData)
+			var materialToChange:BaseMaterial3D = colorizeable_EYES[0].get_surface_override_material(0)
+			materialToChange.albedo_color = colorToChange
 		
 		MaskComponent.SLOT.MOUTH:
 			currentMaskData.mouth = emotion
 			renderMask(currentMaskData)
+			var materialToChange:BaseMaterial3D = colorizeable_MOUTH[0].get_surface_override_material(0)
+			materialToChange.albedo_color = colorToChange
 			
 		MaskComponent.SLOT.TOP:
 			currentMaskData.top = emotion
 			renderMask(currentMaskData)
+			var materialToChange:BaseMaterial3D = colorizeable_TOP[0].get_surface_override_material(0)
+			materialToChange.albedo_color = colorToChange
 			
 		MaskComponent.SLOT.SHAPE:
 			currentMaskData.shape = emotion
 			renderMask(currentMaskData)
+			var materialToChange:BaseMaterial3D = colorizeable_SHAPE[0].get_surface_override_material(0)
+			materialToChange.albedo_color = colorToChange
 
 
 func getMeshestoChangeColor(instancedComponent:Node3D) -> Array[MeshInstance3D]:
