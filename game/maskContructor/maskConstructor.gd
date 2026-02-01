@@ -57,6 +57,13 @@ var colorizeable_MOUTH :Array[MeshInstance3D]
 var colorizeable_TOP :Array[MeshInstance3D]
 var colorizeable_SHAPE :Array[MeshInstance3D]
 
+var colorList :Dictionary = {
+	"EYES": null,
+	"MOUTH": null,
+	"TOP": null,
+	"SHAPE": null
+}
+
 func _ready() -> void:
 		
 	eyePos = eyePosRef.global_position
@@ -89,6 +96,16 @@ func renderMask(maskData:MaskData):
 	instanced_shape = PlaceSceneToSlot(MaskComponent.SLOT.SHAPE, GetEmotionShape(maskData.shape))
 	colorizeable_SHAPE = getMeshestoChangeColor(instanced_shape)
 	
+	var meshes :Array[Array] = [colorizeable_EYES, colorizeable_MOUTH, colorizeable_TOP, colorizeable_SHAPE]
+
+	for i in colorList.size():
+		
+		var key : String = colorList.keys()[i]
+		
+		if colorList[key] != null:
+			
+			_apply_color(meshes[i],colorList[key])
+		
 
 func GetEmotionEyes(emotion : MaskComponent.EMOTIONS) -> PackedScene:
 	match emotion:
@@ -168,6 +185,8 @@ func ReceiveMask(maskdatafrommanager:MaskData):
 	else:
 		currentMaskData = maskdatafrommanager
 		renderMask(currentMaskData)
+		
+
 func updateMaskProperty(
 	slot: MaskComponent.SLOT,
 	emotion: MaskComponent.EMOTIONS,
@@ -181,23 +200,22 @@ func updateMaskProperty(
 	match slot:
 		MaskComponent.SLOT.EYES:
 			currentMaskData.eyes = emotion
-			renderMask(currentMaskData)
-			_apply_color(colorizeable_EYES, colorToChange)
+			colorList["EYES"] = colorToChange
 
 		MaskComponent.SLOT.MOUTH:
 			currentMaskData.mouth = emotion
-			renderMask(currentMaskData)
-			_apply_color(colorizeable_MOUTH, colorToChange)
+			colorList["MOUTH"] = colorToChange
 
 		MaskComponent.SLOT.TOP:
 			currentMaskData.top = emotion
-			renderMask(currentMaskData)
-			_apply_color(colorizeable_TOP, colorToChange)
+			colorList["TOP"] = colorToChange
 
 		MaskComponent.SLOT.SHAPE:
 			currentMaskData.shape = emotion
-			renderMask(currentMaskData)
-			_apply_color(colorizeable_SHAPE, colorToChange)
+			colorList["SHAPE"] = colorToChange
+			
+	renderMask(currentMaskData)		
+	
 
 func _apply_color(
 	meshes: Array[MeshInstance3D],
@@ -205,7 +223,9 @@ func _apply_color(
 ) -> void:
 	if meshes.is_empty():
 		return
-
+	if color == null:
+		return
+	
 	var mat := meshes[0].get_surface_override_material(0)
 	if mat == null:
 		mat = StandardMaterial3D.new()
@@ -220,3 +240,17 @@ func getMeshestoChangeColor(instancedComponent:Node3D) -> Array[MeshInstance3D]:
 	var componentData :MaskComponent = instancedComponent.get_child(0)
 	return componentData.colorizeableMeshes
 	
+func clearColors():
+	
+	for i in colorList:
+		
+		i = null
+		
+
+func FinalizeConstruct(toDiscard:Dictionary):
+	
+	toDiscard.clear()
+	
+	clearColors()
+	FinalizeMask.emit(currentMaskData)
+	clearBuilder()
