@@ -11,5 +11,6 @@ colorizeableMeshes = [NodePath("Cheese/cheese")]
 metadata/_custom_type_script = "uid://cshjpferrlj2n"
 
 [node name="Cheese" parent="MaskComponent" unique_id=1731720273 instance=ExtResource("2_8u5mc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.095315486)
 
 [editable path="MaskComponent/Cheese"]

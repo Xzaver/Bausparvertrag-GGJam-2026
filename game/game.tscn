@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://cry7tttsbil0f"]
 
-[ext_resource type="Script" uid="uid://bbw7djgavoxo4" path="res://game/game.gd" id="1_l1rk1"]
+[ext_resource type="Script" path="res://game/game.gd" id="1_l1rk1"]
 [ext_resource type="PackedScene" uid="uid://cd1a0ufvbeexe" path="res://game/core/GameLoop.tscn" id="2_h7iqs"]
 [ext_resource type="Texture2D" uid="uid://bj0mmrjfbhbfh" path="res://assets/sky/meadow_2k.hdr" id="2_vsp63"]
 [ext_resource type="PackedScene" uid="uid://bocv7txk50p4d" path="res://game/maskContructor/maskConstructor.tscn" id="3_4fuuu"]
 [ext_resource type="PackedScene" uid="uid://bv1l4n3rbgv53" path="res://game/challenges/ChallengeManager.tscn" id="3_b686c"]
-[ext_resource type="PackedScene" uid="uid://b58x45a0d3rf8" path="res://game/ScoreKeeper/ScoreKeeper.tscn" id="3_hb504"]
+[ext_resource type="LightmapGIData" uid="uid://bwvcsv7opmaki" path="res://game/core/data/game.lmbake" id="3_fegy3"]
+[ext_resource type="PackedScene" path="res://game/ScoreKeeper/ScoreKeeper.tscn" id="3_hb504"]
 [ext_resource type="PackedScene" uid="uid://ci7lkqfsb37wk" path="res://assets/maskComponents/new/eyes/EYES_SAD.tscn" id="4_qf6n1"]
 [ext_resource type="PackedScene" uid="uid://dqb5huwrc4ohg" path="res://game/UI_FrontEnd/ui_front_end_node.tscn" id="5_dakft"]
 [ext_resource type="PackedScene" uid="uid://bk0qm484ny6gm" path="res://assets/levelCompononents/Room/Room.gltf" id="5_dxrkv"]
@@ -41,7 +42,9 @@ sky_material = SubResource("PanoramaSkyMaterial_b686c")
 background_mode = 2
 sky = SubResource("Sky_dxrkv")
 tonemap_mode = 2
-glow_enabled = true
+sdfgi_use_occlusion = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_hbvmx"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_4fuuu"]
 
@@ -108,10 +111,18 @@ script = ExtResource("1_l1rk1")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1421054625]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 8.312077, 0)
+light_bake_mode = 1
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1350188789]
 environment = SubResource("Environment_dakft")
+
+[node name="LightmapGI" type="LightmapGI" parent="." unique_id=1167396784]
+supersampling = true
+directional = true
+shadowmask_mode = 2
+interior = true
+light_data = ExtResource("3_fegy3")
 
 [node name="ScoreKeeper" parent="." unique_id=680791359 instance=ExtResource("3_hb504")]
 
@@ -147,8 +158,12 @@ shape_ANGRY = ExtResource("17_fegy3")
 shape_CUTE = ExtResource("18_pvdu1")
 maskRoot = NodePath("../Workbench/MaskConstruct/ShapeOrig/Final")
 
-[node name="Room" parent="." unique_id=628620454 instance=ExtResource("5_dxrkv")]
+[node name="Room" parent="." unique_id=2075882144 instance=ExtResource("5_dxrkv")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="back wall" type="MeshInstance3D" parent="Room" unique_id=1641815834]
+transform = Transform3D(0.28357825, 0, 0, 0, 3.7927964, 0, -8.881784e-16, 0, 5.8979096, 3.738274, 1.5912862, -1.6340515e-07)
+mesh = SubResource("BoxMesh_hbvmx")
 
 [node name="Player" type="Node" parent="." unique_id=1446228021]
 
@@ -161,7 +176,7 @@ current = true
 [node name="MaskConstruct" type="Node" parent="Workbench" unique_id=880345676]
 
 [node name="EyesOrig" type="Node3D" parent="Workbench/MaskConstruct" unique_id=188212834]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.918454, 1.3486253)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.898228, 1.3486253)
 visible = false
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Workbench/MaskConstruct/EyesOrig" unique_id=1132119206]
@@ -172,12 +187,12 @@ mesh = SubResource("SphereMesh_4fuuu")
 transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, 0.08, 0, 0)
 mesh = SubResource("SphereMesh_4fuuu")
 
-[node name="Happy_eyes2" parent="Workbench/MaskConstruct/EyesOrig" unique_id=1578115889 instance=ExtResource("5_y36n6")]
+[node name="Happy_eyes2" parent="Workbench/MaskConstruct/EyesOrig" unique_id=1316596280 instance=ExtResource("5_y36n6")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.1123867, -0.026047945)
 visible = false
 
 [node name="MouthOrig" type="Node3D" parent="Workbench/MaskConstruct" unique_id=800610969]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1.8227699, 1.3368027)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1.8603032, 1.3368027)
 visible = false
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Workbench/MaskConstruct/MouthOrig" unique_id=1169488896]
@@ -185,11 +200,11 @@ transform = Transform3D(0.15944701, 0, 0, 0, 0.15944701, 0, 0, 0, 0.15944701, 0,
 visible = false
 mesh = SubResource("PrismMesh_dxrkv")
 
-[node name="Sad_Mouth2" parent="Workbench/MaskConstruct/MouthOrig" unique_id=1420715533 instance=ExtResource("6_l8g03")]
+[node name="Sad_Mouth2" parent="Workbench/MaskConstruct/MouthOrig" unique_id=1213112678 instance=ExtResource("6_l8g03")]
 transform = Transform3D(-8.742278e-08, -1, -3.5527137e-15, -3.5527137e-15, 3.5527137e-15, -1, 1, -8.742278e-08, -1.5529405e-22, -0.021644235, 0, -9.460983e-10)
 
 [node name="TopOrig" type="Node3D" parent="Workbench/MaskConstruct" unique_id=1123904473]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0726655, 1.3286641)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9646866, 1.3286641)
 visible = false
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Workbench/MaskConstruct/TopOrig" unique_id=1294761666]
@@ -210,7 +225,7 @@ transform = Transform3D(0.2912028, 0, 0, 0, 0.2912028, 0, 0, 0, 0.122320436, 0, 
 visible = false
 mesh = SubResource("BoxMesh_u5opy")
 
-[node name="Mask_Shape" parent="Workbench/MaskConstruct/ShapeOrig" unique_id=1938990181 instance=ExtResource("7_j8tme")]
+[node name="Mask_Shape" parent="Workbench/MaskConstruct/ShapeOrig" unique_id=1618201358 instance=ExtResource("7_j8tme")]
 transform = Transform3D(1, 0, -3.5527137e-15, 0, -4.371139e-08, -1, -3.5527137e-15, 1, -4.371139e-08, 4.440892e-16, -0.031895638, -0.010597706)
 visible = false
 
@@ -224,6 +239,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.227514, 1.0380096, 0.18708
 
 [node name="AnimationPlayer" parent="CustomerDoll" index="0" unique_id=1298844310]
 libraries/ = SubResource("AnimationLibrary_ln7ps")
+
+[node name="Sprite3D" parent="CustomerDoll/Path3D/PathFollow3D" parent_id_path=PackedInt32Array(285034977, 418750148) index="0" unique_id=849827817]
+gi_mode = 2
+shaded = true
 
 [node name="TextGenerator" parent="." unique_id=1622416483 instance=ExtResource("29_58yx1")]
 dialogue = ExtResource("30_hbvmx")
