@@ -21,10 +21,10 @@ func set_label(value: String) -> void:
 	text = value
 
 
-func update_label_from_shape(index: int) -> void:
-	if index < 0 or index >= shapes.size():
-		return
-	text = shapes[index].name
+#func update_label_from_shape(index: int) -> void:
+	#if index < 0 or index >= shapes.size():
+		#return
+	#text = shapes[index].name
 
 
 # =========================

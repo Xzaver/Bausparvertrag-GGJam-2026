@@ -100,8 +100,8 @@ func _ready() -> void:
 	# 🔁 Selbst-Listener
 	self.mask_process_finished.connect(_on_mask_process_finished)
 
-	## Initiale Iteration
-	#set_mask_text_for_iteration(SLOT_SEQUENCE[current_slot_index])
+	# Initiale Iteration
+	set_mask_text_for_iteration(SLOT_SEQUENCE[current_slot_index])
 
 	
 	if color_picker:
@@ -111,9 +111,9 @@ func _ready() -> void:
 		debug_apply_all_button.pressed.connect(_on_debug_apply_all_pressed)
 	set_active(false)
 
-
-func _to_one_based(value: int) -> int:
-	return value + 1
+#
+#func _to_one_based(value: int) -> int:
+	#return value + 1
 
 func _on_mask_process_finished(selections: Dictionary) -> void:
 	if DEBUG_SIGNALS:
@@ -476,8 +476,6 @@ func debug_apply_active_shape_to_all_buttons() -> void:
 func start() -> void:
 	set_active(true)
 	# Initiale Iteration
-	set_mask_text_for_iteration(SLOT_SEQUENCE[current_slot_index])
-
 
 func set_active(val:bool) -> void:
 	visible = val
