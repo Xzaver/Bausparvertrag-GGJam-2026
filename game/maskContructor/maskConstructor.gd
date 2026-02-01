@@ -63,6 +63,8 @@ func _ready() -> void:
 	mouthPos = mouthPosRef.global_position
 	topPos = topPosRef.global_position
 	shapePos = shapePosRef.global_position
+	
+	updateMaskProperty(MaskComponent.SLOT.MOUTH,MaskComponent.EMOTIONS.SAD, Color(0,0,0))
 
 func clearBuilder():
 	
@@ -166,33 +168,51 @@ func ReceiveMask(maskdatafrommanager:MaskData):
 	else:
 		currentMaskData = maskdatafrommanager
 		renderMask(currentMaskData)
-
-func updateMaskProperty(slot:MaskComponent.SLOT,emotion:MaskComponent.EMOTIONS,colorToChange:Color):
+func updateMaskProperty(
+	slot: MaskComponent.SLOT,
+	emotion: MaskComponent.EMOTIONS,
+	colorToChange: Color
+) -> void:
 	
+	# ⛑️ Guard: MaskData sicherstellen
+	if currentMaskData == null:
+		currentMaskData = MaskData.new()
+
 	match slot:
 		MaskComponent.SLOT.EYES:
 			currentMaskData.eyes = emotion
 			renderMask(currentMaskData)
-			var materialToChange:BaseMaterial3D = colorizeable_EYES[0].get_surface_override_material(0)
-			materialToChange.albedo_color = colorToChange
-		
+			_apply_color(colorizeable_EYES, colorToChange)
+
 		MaskComponent.SLOT.MOUTH:
 			currentMaskData.mouth = emotion
 			renderMask(currentMaskData)
-			var materialToChange:BaseMaterial3D = colorizeable_MOUTH[0].get_surface_override_material(0)
-			materialToChange.albedo_color = colorToChange
-			
+			_apply_color(colorizeable_MOUTH, colorToChange)
+
 		MaskComponent.SLOT.TOP:
 			currentMaskData.top = emotion
 			renderMask(currentMaskData)
-			var materialToChange:BaseMaterial3D = colorizeable_TOP[0].get_surface_override_material(0)
-			materialToChange.albedo_color = colorToChange
-			
+			_apply_color(colorizeable_TOP, colorToChange)
+
 		MaskComponent.SLOT.SHAPE:
 			currentMaskData.shape = emotion
 			renderMask(currentMaskData)
-			var materialToChange:BaseMaterial3D = colorizeable_SHAPE[0].get_surface_override_material(0)
-			materialToChange.albedo_color = colorToChange
+			_apply_color(colorizeable_SHAPE, colorToChange)
+
+func _apply_color(
+	meshes: Array[MeshInstance3D],
+	color: Color
+) -> void:
+	if meshes.is_empty():
+		return
+
+	var mat := meshes[0].get_surface_override_material(0)
+	if mat == null:
+		mat = StandardMaterial3D.new()
+		meshes[0].set_surface_override_material(0, mat)
+
+	(mat as BaseMaterial3D).albedo_color = color
+
 
 
 func getMeshestoChangeColor(instancedComponent:Node3D) -> Array[MeshInstance3D]:
