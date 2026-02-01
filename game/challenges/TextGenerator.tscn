@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://b0eta67emrci2"]
 
 [ext_resource type="Script" uid="uid://blvsfjlyn7vqx" path="res://game/challenges/TextGenerator.gd" id="1_6c5ns"]
+[ext_resource type="JSON" path="res://assets/Dialog.json" id="2_qns4x"]
 
 [node name="TextGenerator" type="Node" unique_id=1622416483]
 script = ExtResource("1_6c5ns")
+dialogue = ExtResource("2_qns4x")

@@ -2,7 +2,7 @@ class_name ChallengeManager extends Node
 
 var challenges:Array[Challenge]
 var slots:Array
-
+@export var textGenerator : TextGenerator
 func reset():
 	challenges.clear()
 	slots = MaskComponent.SLOT.values()
@@ -42,7 +42,7 @@ func requestChallenge(storedMaskData:MaskData, amount:int , first:bool = false):
 		emotions[emotions.keys().pick_random()] += 1
 
 	
-	return challenges
+	
 
 
 
