@@ -2,16 +2,15 @@ class_name ChallengeManager extends Node
 
 var challenges:Array[Challenge]
 var slots:Array
+
 func reset():
 	challenges.clear()
 	slots = MaskComponent.SLOT.values()
 
+
 func _ready() -> void:
 	reset()
-	requestChallenge(MaskData.RandomMask(),4,true)
-	print(challenges)
 
-	
 
 
 func requestChallenge(storedMaskData:MaskData, amount:int , first:bool = false):
@@ -19,7 +18,6 @@ func requestChallenge(storedMaskData:MaskData, amount:int , first:bool = false):
 	var emotionFlags = 0
 	for i in range(amount):
 		var slot:MaskComponent.SLOT = randomSlot()
-		print(slot)
 		if first:
 			challenges.append(ChallengeRepair.new(storedMaskData, slot))
 			first = false
@@ -42,7 +40,7 @@ func requestChallenge(storedMaskData:MaskData, amount:int , first:bool = false):
 	
 	for i in range(emotionFlags):
 		emotions[emotions.keys().pick_random()] += 1
-	print(emotions)
+
 	
 	return challenges
 
