@@ -42,10 +42,10 @@ custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 text = "TEST BUBBLE TEXT"
 
-[node name="Button" type="Button" parent="TextBubble" unique_id=1288481912]
-visible = false
-custom_minimum_size = Vector2(200, 200)
+[node name="ColorRect" type="ColorRect" parent="TextBubble" unique_id=580128992]
+z_index = -1
 layout_mode = 2
+color = Color(0, 0, 0, 0.2901961)
 
 [node name="Header" type="MarginContainer" parent="." unique_id=594615917]
 visible = false
