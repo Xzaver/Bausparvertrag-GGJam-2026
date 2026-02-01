@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://liv1n0jvg6vo"]
+
+[ext_resource type="Script" uid="uid://q153uqkaq60g" path="res://game/CustomerDoll/customerDoll.gd" id="1_6wail"]
+
+[sub_resource type="Curve3D" id="Curve3D_p4bxn"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.3788123, 0, 0, 0, 0, 0, 0, 0, 0, 4.4972897, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_p4bxn"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6wail"]
+gradient = SubResource("Gradient_p4bxn")
+
+[node name="CustomerDoll" type="Node3D" unique_id=285034977 node_paths=PackedStringArray("sprite", "animPlayer")]
+script = ExtResource("1_6wail")
+sprite = NodePath("Path3D/PathFollow3D/Sprite3D")
+animPlayer = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1298844310]
+
+[node name="Path3D" type="Path3D" parent="." unique_id=2031136643]
+curve = SubResource("Curve3D_p4bxn")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D" unique_id=418750148]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+loop = false
+
+[node name="Sprite3D" type="Sprite3D" parent="Path3D/PathFollow3D" unique_id=849827817]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+texture = SubResource("GradientTexture2D_6wail")

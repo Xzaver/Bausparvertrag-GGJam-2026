@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bj0mmrjfbhbfh" path="res://assets/sky/meadow_2k.hdr" id="2_vsp63"]
 [ext_resource type="PackedScene" uid="uid://bocv7txk50p4d" path="res://game/maskContructor/maskConstructor.tscn" id="3_4fuuu"]
 [ext_resource type="PackedScene" uid="uid://bv1l4n3rbgv53" path="res://game/challenges/ChallengeManager.tscn" id="3_b686c"]
+[ext_resource type="PackedScene" uid="uid://b58x45a0d3rf8" path="res://game/ScoreKeeper/ScoreKeeper.tscn" id="3_hb504"]
 [ext_resource type="PackedScene" uid="uid://ci7lkqfsb37wk" path="res://assets/maskComponents/new/EYES_SAD.tscn" id="4_qf6n1"]
 [ext_resource type="PackedScene" uid="uid://dqb5huwrc4ohg" path="res://game/UI_FrontEnd/ui_front_end_node.tscn" id="5_dakft"]
 [ext_resource type="PackedScene" uid="uid://bk0qm484ny6gm" path="res://assets/levelCompononents/Room/Room.gltf" id="5_dxrkv"]
@@ -14,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cesojvhgn8hmi" path="res://assets/levelCompononents/Sad_Mouth/Sad_Mouth.gltf" id="6_l8g03"]
 [ext_resource type="PackedScene" uid="uid://caop6s06g4pib" path="res://assets/maskComponents/new/SHAPE_Universal.tscn" id="7_hb504"]
 [ext_resource type="PackedScene" uid="uid://ci16vrxn4s8mr" path="res://assets/levelCompononents/Mask_Shape/Mask_Shape.gltf" id="7_j8tme"]
+[ext_resource type="PackedScene" uid="uid://liv1n0jvg6vo" path="res://game/CustomerDoll/CustomerDoll.tscn" id="16_ee6o4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_b686c"]
 panorama = ExtResource("2_vsp63")
@@ -35,6 +37,58 @@ glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_u5opy"]
 
+[sub_resource type="Animation" id="Animation_ln7ps"]
+length = 0.16666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ee6o4"]
+resource_name = "enter"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.36602142, 0.09473272),
+"update": 0,
+"values": [0.0, 0.5]
+}
+
+[sub_resource type="Animation" id="Animation_4cobl"]
+resource_name = "leave"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2.2973967, 1.9318731),
+"update": 0,
+"values": [0.5, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ln7ps"]
+_data = {
+&"RESET": SubResource("Animation_ln7ps"),
+&"enter": SubResource("Animation_ee6o4"),
+&"leave": SubResource("Animation_4cobl")
+}
+
 [node name="Game" type="Node3D" unique_id=1891684557]
 script = ExtResource("1_l1rk1")
 
@@ -45,10 +99,16 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1350188789]
 environment = SubResource("Environment_dakft")
 
+[node name="ScoreKeeper" parent="." unique_id=680791359 instance=ExtResource("3_hb504")]
+
 [node name="ChallengeManager" parent="." unique_id=2007542354 instance=ExtResource("3_b686c")]
 
-[node name="GameSession" parent="." unique_id=247687767 node_paths=PackedStringArray("maskBuilder") instance=ExtResource("2_h7iqs")]
+[node name="GameSession" parent="." unique_id=247687767 node_paths=PackedStringArray("maskBuilder", "challengeManager", "scoreKeeper", "ui", "customerDoll") instance=ExtResource("2_h7iqs")]
 maskBuilder = NodePath("../MaskConstructor")
+challengeManager = NodePath("../ChallengeManager")
+scoreKeeper = NodePath("../ScoreKeeper")
+ui = NodePath("../UI_FrontEnd_Node")
+customerDoll = NodePath("../CustomerDoll")
 
 [node name="MaskConstructor" parent="." unique_id=1958036344 node_paths=PackedStringArray("eyePosRef", "mouthPosRef", "topPosRef", "shapePosRef", "maskRoot") instance=ExtResource("3_4fuuu")]
 eyePosRef = NodePath("../Workbench/MaskConstruct/EyesOrig")
@@ -145,7 +205,14 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0
 
 [node name="UI_FrontEnd_Node" parent="." unique_id=1647626456 instance=ExtResource("5_dakft")]
 
+[node name="CustomerDoll" parent="." unique_id=285034977 instance=ExtResource("16_ee6o4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.227514, 1.0380096, 0.18708539)
+
+[node name="AnimationPlayer" parent="CustomerDoll" index="0" unique_id=1298844310]
+libraries/ = SubResource("AnimationLibrary_ln7ps")
+
 [connection signal="mask_process_finished" from="UI_FrontEnd_Node" to="MaskConstructor" method="FinalizeConstruct"]
 [connection signal="mask_selection_changed" from="UI_FrontEnd_Node" to="MaskConstructor" method="updateMaskProperty"]
 
 [editable path="MaskConstructor"]
+[editable path="CustomerDoll"]
