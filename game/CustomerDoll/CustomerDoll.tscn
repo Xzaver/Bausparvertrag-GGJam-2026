@@ -1,6 +1,18 @@
 [gd_scene format=3 uid="uid://liv1n0jvg6vo"]
 
 [ext_resource type="Script" uid="uid://q153uqkaq60g" path="res://game/CustomerDoll/customerDoll.gd" id="1_6wail"]
+[ext_resource type="Texture2D" uid="uid://bx20xeavdy8aw" path="res://assets/Customers/Cult_2/Electro_Cult_01.png" id="2_bakm6"]
+[ext_resource type="Texture2D" uid="uid://c8bfhnd7w6vsc" path="res://assets/Customers/Cult_2/Electro_Cult_02.png" id="3_kreyo"]
+[ext_resource type="Texture2D" uid="uid://btoons07yapwx" path="res://assets/Customers/Cult_2/Electro_Cult_03.png" id="4_lcu71"]
+[ext_resource type="Texture2D" uid="uid://d31pe21e5fujh" path="res://assets/Customers/Cult_0/Shoe_01.png" id="5_6jl6h"]
+[ext_resource type="Texture2D" uid="uid://cbsv2sfj064sl" path="res://assets/Customers/Cult_0/Shoe_02.png" id="6_eqa4a"]
+[ext_resource type="Texture2D" uid="uid://b0fu8wchf7kts" path="res://assets/Customers/Cult_0/Shoe_03.png" id="7_4upw0"]
+[ext_resource type="Texture2D" uid="uid://56otbje8801e" path="res://assets/Customers/Cult_3/Animal_01.png" id="8_15qyi"]
+[ext_resource type="Texture2D" uid="uid://co8ryty8gydk0" path="res://assets/Customers/Cult_3/Animal_02.png" id="9_y5rkc"]
+[ext_resource type="Texture2D" uid="uid://xf25rcu3y4xf" path="res://assets/Customers/Cult_3/Animal_03.png" id="10_4vgl4"]
+[ext_resource type="Texture2D" uid="uid://f6wbcqcnrn8e" path="res://assets/Customers/Cult_1/Plant_01.png" id="11_yxd68"]
+[ext_resource type="Texture2D" uid="uid://bwbocokqrd8mb" path="res://assets/Customers/Cult_1/Plant_02.png" id="12_56y0i"]
+[ext_resource type="Texture2D" uid="uid://dywux2rc1rxn8" path="res://assets/Customers/Cult_1/Plant_03.png" id="13_guc6g"]
 
 [sub_resource type="Curve3D" id="Curve3D_p4bxn"]
 _data = {
@@ -18,6 +30,10 @@ gradient = SubResource("Gradient_p4bxn")
 script = ExtResource("1_6wail")
 sprite = NodePath("Path3D/PathFollow3D/Sprite3D")
 animPlayer = NodePath("AnimationPlayer")
+electro_Sprites = Array[Texture2D]([ExtResource("2_bakm6"), ExtResource("3_kreyo"), ExtResource("4_lcu71")])
+shoe_Sprites = Array[Texture2D]([ExtResource("5_6jl6h"), ExtResource("6_eqa4a"), ExtResource("7_4upw0")])
+animal_Sprites = Array[Texture2D]([ExtResource("8_15qyi"), ExtResource("9_y5rkc"), ExtResource("10_4vgl4")])
+plant_Sprites = Array[Texture2D]([ExtResource("11_yxd68"), ExtResource("12_56y0i"), ExtResource("13_guc6g")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1298844310]
 
