@@ -1,17 +1,17 @@
 
 [
-	{"type":"intro","cult":"plant","id":1, "content": "Hi, I need a mask, I can't be part of them without one."},
-	{"type":"intro","cult":"plant","id":2, "content": "I've heard you're a natural at making masks. Can you help me?"},
-	{"type":"intro","cult":"plant","id":3, "content": "Could you help me look like i'm blooming"},
-	{"type":"intro","cult":"animal","id":1, "content":  "HIII, heard that you sell super cool masks, could i maybe have one too?"},
-	{"type":"intro","cult":"animal","id":2, "content":  "Aren't you the one that makes those colorful masks? Would you please make me one?"},
-	{"type":"intro","cult":"animal","id":3, "content":  "Could I... Could I please have a mask?"},
-	{"type":"intro","cult":"shoe","id":1, "content": "Need somethin'. Could ya help me get sorted?"},
-	{"type":"intro","cult":"shoe","id":2, "content": "Small one, need a mask from ya. Can ya do it?"},
-	{"type":"intro","cult":"shoe","id":3, "content": "Hey hey hey, friend! Need a new look. Mind helping me?"},
-	{"type":"intro","cult":"lamp","id":1, "content": "Good day! I intend to purchase one of your masks."},
-	{"type":"intro","cult":"lamp","id":2, "content": "I would like to inquire about your availability. I would like to purchase a mask."},
-	{"type":"intro","cult":"lamp","id":3, "content": "Nice shop you have here. Would it be possible, perchance, for you to help me?"},
+	{"type":"repair","cult":"plant","id":1, "content": "Hi, I need a mask, I can't be part of them without one."},
+	{"type":"repair","cult":"plant","id":2, "content": "I've heard you're a natural at making masks. Can you help me?"},
+	{"type":"repair","cult":"plant","id":3, "content": "Could you help me look like I'm blooming"},
+	{"type":"repair","cult":"animal","id":1, "content":  "HIII, heard that you sell super cool masks, could i maybe have one too?"},
+	{"type":"repair","cult":"animal","id":2, "content":  "Aren't you the one that makes those colorful masks? Would you please make me one?"},
+	{"type":"repair","cult":"animal","id":3, "content":  "Could I... Could I please have a mask?"},
+	{"type":"repair","cult":"shoe","id":1, "content": "Need somethin'. Could ya help me get sorted?"},
+	{"type":"repair","cult":"shoe","id":2, "content": "Small one, need a mask from ya. Can ya do it?"},
+	{"type":"repair","cult":"shoe","id":3, "content": "Hey hey hey, friend! Need a new look. Mind helping me?"},
+	{"type":"repair","cult":"lamp","id":1, "content": "Good day! I intend to purchase one of your masks."},
+	{"type":"repair","cult":"lamp","id":2, "content": "I would like to inquire about your availability. I would like to purchase a mask."},
+	{"type":"repair","cult":"lamp","id":3, "content": "Nice shop you have here. Would it be possible, perchance, for you to help me?"},
 
 	{"repair_plant_1": "Hey there, sorry to bother you but sadly it this mask can't grow itself back together."},
 	{"repair_plant_2": "Hello, I tried it with letting it stay in the sun, but I think you have to fix the mask for me."},
@@ -23,7 +23,7 @@
 	{"repair_shoe_2": "Oy, mask maker, need fixing for this!"},
 	{"repair_shoe_3": "Mask dude, this needs fix, go do that!"},
 	{"repair_lamp_1": "I beg your pardon, it seems that my mask happens to be in an unacceptable condition, could you take a look at it?"},
-	{"repair_lamp_2": "I am sorry to bother you, but I have the urgent intro for you to set this item into its former state."},
+	{"repair_lamp_2": "I am sorry to bother you, but I have the urgent repair for you to set this item into its former state."},
 	{"repair_lamp_3": "My asset is in dire need of an overhaul, please see to that."},
 
 

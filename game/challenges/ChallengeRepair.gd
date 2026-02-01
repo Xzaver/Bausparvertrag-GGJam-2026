@@ -3,6 +3,7 @@ var brokenComp:MaskComponent.SLOT
 var initialMask:MaskData
 
 func _init(storedMask : MaskData, slot : MaskComponent.SLOT) -> void:
+	type = Challenge.TYPES.REPAIR
 	brokenComp = slot
 	initialMask = storedMask.duplicate()
 	

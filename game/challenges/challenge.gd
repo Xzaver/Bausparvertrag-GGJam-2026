@@ -1,5 +1,6 @@
 @abstract class_name Challenge
-
+enum TYPES {REPAIR,EMOTION}
+var type : TYPES
 
 
 

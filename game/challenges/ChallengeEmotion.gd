@@ -3,6 +3,7 @@ var requiredEmotion : MaskComponent.EMOTIONS
 var requiredRatio : float
 
 func _init(storedMask : MaskData, emotion : MaskComponent.EMOTIONS, ratio : float) -> void:
+	type = Challenge.TYPES.EMOTION
 	requiredEmotion = emotion
 	requiredRatio = ratio 
 
