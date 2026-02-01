@@ -6,8 +6,6 @@
 [ext_resource type="Script" uid="uid://duuirnwyn4rj2" path="res://game/UI_FrontEnd/hover_light.gd" id="2_y2ony"]
 [ext_resource type="SphereMesh" uid="uid://784fvu0wgu28" path="res://game/UI_FrontEnd/new_sphere_mesh.tres" id="4_h7x47"]
 
-[sub_resource type="Environment" id="Environment_y2ony"]
-
 [sub_resource type="BoxMesh" id="BoxMesh_s83qi"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_nbwjk"]
@@ -83,9 +81,6 @@ visible = false
 script = ExtResource("2_y2ony")
 
 [node name="Camera3D" type="Camera3D" parent="Footer_Container/Node3D" unique_id=1546807400]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Footer_Container/Node3D" unique_id=187592722]
-environment = SubResource("Environment_y2ony")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Footer_Container/Node3D" unique_id=336827190]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6459079, 9.802751, 1.3474886)
@@ -195,9 +190,6 @@ script = ExtResource("2_y2ony")
 
 [node name="Camera3D" type="Camera3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape1/SubViewportContainer/SubViewport/Node3D" unique_id=296809216]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape1/SubViewportContainer/SubViewport/Node3D" unique_id=500739314]
-environment = SubResource("Environment_y2ony")
-
 [node name="OmniLight3D" type="OmniLight3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape1/SubViewportContainer/SubViewport/Node3D" unique_id=344792971]
 light_color = Color(0.22446853, 0.99999994, 0.97581047, 1)
 light_energy = 0.0
@@ -253,9 +245,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 script = ExtResource("2_y2ony")
 
 [node name="Camera3D" type="Camera3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport/Node3D" unique_id=1015294101]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport/Node3D" unique_id=1514724661]
-environment = SubResource("Environment_y2ony")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2/SubViewportContainer/SubViewport/Node3D" unique_id=482407808]
 light_color = Color(0.22446853, 0.99999994, 0.97581047, 1)
@@ -313,9 +302,6 @@ script = ExtResource("2_y2ony")
 
 [node name="Camera3D" type="Camera3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape3/SubViewportContainer/SubViewport/Node3D" unique_id=518900949]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape3/SubViewportContainer/SubViewport/Node3D" unique_id=333869046]
-environment = SubResource("Environment_y2ony")
-
 [node name="OmniLight3D" type="OmniLight3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape3/SubViewportContainer/SubViewport/Node3D" unique_id=1632976551]
 light_color = Color(0.22446853, 0.99999994, 0.97581047, 1)
 light_energy = 0.0
@@ -372,9 +358,6 @@ script = ExtResource("2_y2ony")
 
 [node name="Camera3D" type="Camera3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape4/SubViewportContainer/SubViewport/Node3D" unique_id=1927035860]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape4/SubViewportContainer/SubViewport/Node3D" unique_id=1258388071]
-environment = SubResource("Environment_y2ony")
-
 [node name="OmniLight3D" type="OmniLight3D" parent="Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape4/SubViewportContainer/SubViewport/Node3D" unique_id=1429582453]
 light_color = Color(0.22446853, 0.99999994, 0.97581047, 1)
 light_energy = 0.0
@@ -427,9 +410,6 @@ visible = false
 script = ExtResource("2_y2ony")
 
 [node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=1749789434]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D" unique_id=1953639537]
-environment = SubResource("Environment_y2ony")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Node3D" unique_id=198268080]
 light_color = Color(0.22446853, 0.99999994, 0.97581047, 1)
