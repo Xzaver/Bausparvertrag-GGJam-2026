@@ -70,7 +70,7 @@ shape_ANGRY = ExtResource("7_hb504")
 shape_CUTE = ExtResource("7_hb504")
 maskRoot = NodePath("../Workbench/MaskConstruct/ShapeOrig/Final")
 
-[node name="Room" parent="." unique_id=1008153374 instance=ExtResource("5_dxrkv")]
+[node name="Room" parent="." unique_id=628620454 instance=ExtResource("5_dxrkv")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 
 [node name="Player" type="Node" parent="." unique_id=1446228021]
@@ -141,5 +141,7 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 
 [node name="UI_FrontEnd_Node" parent="." unique_id=1647626456 instance=ExtResource("5_dakft")]
+
+[connection signal="mask_selection_changed" from="UI_FrontEnd_Node" to="MaskConstructor" method="updateMaskProperty"]
 
 [editable path="MaskConstructor"]
