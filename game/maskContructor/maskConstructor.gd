@@ -12,21 +12,25 @@ var currentMaskData :MaskData
 
 # --- components
 
+@export_group("eye")
 @export var eye_SAD :PackedScene 
 @export var eye_HAPPY :PackedScene 
 @export var eye_ANGRY :PackedScene 
 @export var eye_CUTE :PackedScene 
 
+@export_group("mouth")
 @export var mouth_SAD :PackedScene 
 @export var mouth_HAPPY :PackedScene 
 @export var mouth_ANGRY :PackedScene 
 @export var mouth_CUTE :PackedScene 
 
+@export_group("top")
 @export var top_SAD :PackedScene 
 @export var top_HAPPY :PackedScene 
 @export var top_ANGRY :PackedScene 
-@export var top_CUTE :PackedScene 
-
+@export var top_CUTE :PackedScene
+ 
+@export_group("shape")
 @export var shape_SAD :PackedScene
 @export var shape_HAPPY :PackedScene 
 @export var shape_ANGRY :PackedScene 
@@ -42,6 +46,11 @@ var topPos :Vector3
 var shapePos :Vector3
 
 signal FinalizeMask(maskDataToSend:MaskData)
+
+var instanced_eyes :Node3D
+var instanced_mouth :Node3D
+var instanced_top :Node3D
+var instanced_shape :Node3D
 
 func _ready() -> void:
 		
@@ -61,10 +70,14 @@ func renderMask(maskData:MaskData):
 	
 	clearBuilder()
 	
-	PlaceSceneToSlot(MaskComponent.SLOT.EYES, GetEmotionEyes(maskData.eyes))
-	PlaceSceneToSlot(MaskComponent.SLOT.MOUTH, GetEmotionMouth(maskData.mouth))
-	PlaceSceneToSlot(MaskComponent.SLOT.TOP, GetEmotionTop(maskData.top))
-	PlaceSceneToSlot(MaskComponent.SLOT.SHAPE, GetEmotionShape(maskData.shape))
+	instanced_eyes = PlaceSceneToSlot(MaskComponent.SLOT.EYES, GetEmotionEyes(maskData.eyes))
+	getMeshestoChangeColor(instanced_eyes)
+	instanced_mouth = PlaceSceneToSlot(MaskComponent.SLOT.MOUTH, GetEmotionMouth(maskData.mouth))
+	getMeshestoChangeColor(instanced_mouth)
+	instanced_top = PlaceSceneToSlot(MaskComponent.SLOT.TOP, GetEmotionTop(maskData.top))
+	getMeshestoChangeColor(instanced_top)
+	instanced_shape = PlaceSceneToSlot(MaskComponent.SLOT.SHAPE, GetEmotionShape(maskData.shape))
+	getMeshestoChangeColor(instanced_shape)
 
 func GetEmotionEyes(emotion : MaskComponent.EMOTIONS) -> PackedScene:
 	match emotion:
@@ -114,7 +127,7 @@ func GetEmotionShape(emotion : MaskComponent.EMOTIONS) -> PackedScene:
 			return shape_SAD
 	return null
 
-func PlaceSceneToSlot(slot : MaskComponent.SLOT, objToInstantiate : PackedScene) -> void:
+func PlaceSceneToSlot(slot : MaskComponent.SLOT, objToInstantiate : PackedScene) -> Node3D:
 	
 	print("Place")
 	
@@ -125,13 +138,18 @@ func PlaceSceneToSlot(slot : MaskComponent.SLOT, objToInstantiate : PackedScene)
 	match slot:
 		MaskComponent.SLOT.EYES:
 			instantiatedComponent.global_position = eyePos
+			return instantiatedComponent
 		MaskComponent.SLOT.MOUTH:
 			instantiatedComponent.global_position = mouthPos
+			return instantiatedComponent
 		MaskComponent.SLOT.TOP:
 			instantiatedComponent.global_position = topPos
+			return instantiatedComponent
 		MaskComponent.SLOT.SHAPE:
 			instantiatedComponent.global_position = shapePos
-		
+			return instantiatedComponent
+
+	return instantiatedComponent
 
 func ReceiveMask(maskdatafrommanager:MaskData):
 	if maskdatafrommanager == null:
@@ -145,12 +163,23 @@ func updateMaskProperty(slot:MaskComponent.SLOT,emotion:MaskComponent.EMOTIONS):
 	match slot:
 		MaskComponent.SLOT.EYES:
 			currentMaskData.eyes = emotion
+			renderMask(currentMaskData)
 		
 		MaskComponent.SLOT.MOUTH:
 			currentMaskData.mouth = emotion
+			renderMask(currentMaskData)
 			
 		MaskComponent.SLOT.TOP:
 			currentMaskData.top = emotion
+			renderMask(currentMaskData)
 			
 		MaskComponent.SLOT.SHAPE:
 			currentMaskData.shape = emotion
+			renderMask(currentMaskData)
+
+
+func getMeshestoChangeColor(instancedComponent:Node3D) -> Array[MeshInstance3D]:
+	
+	var componentData :MaskComponent = instancedComponent.get_child(0)
+	return componentData.colorizeableMeshes
+	
