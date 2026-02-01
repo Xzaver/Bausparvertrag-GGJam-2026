@@ -7,19 +7,27 @@ class_name CustomerDoll extends Node3D
 @export var animal_Sprites :Array[Texture2D]
 @export var plant_Sprites :Array[Texture2D]
 
-var cultList :Dictionary = {
-CustomerFactory.CULT.ELECTRO: electro_Sprites,
-CustomerFactory.CULT.SHOE: shoe_Sprites,
-CustomerFactory.CULT.ANIMAL: animal_Sprites,
-CustomerFactory.CULT.PLANT: plant_Sprites
+@onready var cultList :Dictionary = {
+0: electro_Sprites,
+1: shoe_Sprites,
+2: animal_Sprites,
+3: plant_Sprites
 }
 
 
 
 
 func updateSprite(customer :CustomerData) -> void :
-	sprite.texture = cultList[customer.cult][customer.sprite]
+	cultList = {
+	0: electro_Sprites,
+	1: shoe_Sprites,
+	2: animal_Sprites,
+	3: plant_Sprites
+	}
+
+	var cultArray : Array[Texture2D] = cultList[customer.cult]
 	
+	sprite.texture = cultArray.get(customer.sprite)
 
 
 func enter() -> void:

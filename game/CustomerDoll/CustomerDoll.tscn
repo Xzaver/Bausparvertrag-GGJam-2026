@@ -45,5 +45,5 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0
 loop = false
 
 [node name="Sprite3D" type="Sprite3D" parent="Path3D/PathFollow3D" unique_id=849827817]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+transform = Transform3D(-6.5567085e-09, 0, 0.15, 0, 0.15, 0, -0.15, 0, -6.5567085e-09, 0, 1, 0)
 texture = SubResource("GradientTexture2D_6wail")

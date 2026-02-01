@@ -30,10 +30,14 @@ func NextState() -> GameState:
 	
 	if currentGameState == GameState.FinalizeCustomer:
 		newState = 0
+		SetGameState(newState)
+	if currentGameState == GameState.GameOver:
+		pass
 	else:
 		newState += 1
+		SetGameState(newState)
+
 	
-	SetGameState(newState)
 	
 	return currentGameState
 	
@@ -48,5 +52,6 @@ enum GameState {
 	WaitingForCustomer,
 	IntroduceCustomer,
 	ProcessCustomer,
-	FinalizeCustomer
+	FinalizeCustomer,
+	GameOver
 }

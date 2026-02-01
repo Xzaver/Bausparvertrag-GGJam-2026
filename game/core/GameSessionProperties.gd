@@ -24,7 +24,7 @@ static func GetDifficultyProperties(_difficulty: Difficulty) -> GameSessionPrope
 		Difficulty.EASY:
 			return GameSessionProperties.new(10, 1, 1, Difficulty.EASY)
 		Difficulty.MEDIUM:
-			return GameSessionProperties.new(15, 5, 8, Difficulty.MEDIUM)
+			return GameSessionProperties.new(36, 12, 12, Difficulty.MEDIUM)
 		Difficulty.HARD:
 			return GameSessionProperties.new(20, 7, 10, Difficulty.HARD)
 		Difficulty.UNMASKED:
