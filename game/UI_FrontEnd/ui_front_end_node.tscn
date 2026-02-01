@@ -27,6 +27,25 @@ next_button = NodePath("Footer_Container/Right/NextStep")
 shape_buttons = [NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape1"), NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape2"), NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape3"), NodePath("Footer_Container/Footer_mid/MarginContainer/HBoxContainer/Button_Shape4")]
 debug_mesh_container = NodePath("Node3D/MeshContainer")
 
+[node name="TextBubble" type="MarginContainer" parent="." unique_id=1697689572]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextBubble" unique_id=1598354524]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+text = "TEST BUBBLE TEXT"
+
+[node name="Button" type="Button" parent="TextBubble" unique_id=1288481912]
+visible = false
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
 [node name="Header" type="MarginContainer" parent="." unique_id=594615917]
 visible = false
 layout_mode = 0
