@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bv1l4n3rbgv53"]
+
+[ext_resource type="Script" uid="uid://bsh7vdomomvab" path="res://game/challenges/ChallengeManager.gd" id="1_c7lps"]
+
+[node name="ChallengeManager" type="Node" unique_id=507800507]
+script = ExtResource("1_c7lps")
