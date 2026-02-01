@@ -12,7 +12,10 @@ func _ready() -> void:
 	print(challenges)
 
 	
-func requestChallenge(storedMaskData:MaskData, amount:int , first:bool = false) -> Array:
+
+
+func requestChallenge(storedMaskData:MaskData, amount:int , first:bool = false):
+
 	var emotionFlags = 0
 	for i in range(amount):
 		var slot:MaskComponent.SLOT = randomSlot()
@@ -29,6 +32,7 @@ func requestChallenge(storedMaskData:MaskData, amount:int , first:bool = false) 
 					emotionFlags+=1
 					challenges.append(ChallengeRepair.new(storedMaskData, slot))
 			
+
 	var emotions = {
 		"sad" = 0,
 		"happy" = 0,
@@ -43,8 +47,15 @@ func requestChallenge(storedMaskData:MaskData, amount:int , first:bool = false) 
 	return challenges
 
 
-func validate(userMaskData:MaskData):
-	pass
+
+
+func validate(userMaskData:MaskData) -> int:
+	var malus: int = 0
+	for i in challenges.size():
+		if challenges[i].validate(userMaskData) == false:
+			malus+=1
+		
+	return malus
 
 
 func randomSlot() -> MaskComponent.SLOT:

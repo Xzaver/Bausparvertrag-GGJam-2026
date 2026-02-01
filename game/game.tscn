@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cd1a0ufvbeexe" path="res://game/core/GameLoop.tscn" id="2_h7iqs"]
 [ext_resource type="Texture2D" uid="uid://bj0mmrjfbhbfh" path="res://assets/sky/meadow_2k.hdr" id="2_vsp63"]
 [ext_resource type="PackedScene" uid="uid://bocv7txk50p4d" path="res://game/maskContructor/maskConstructor.tscn" id="3_4fuuu"]
+[ext_resource type="PackedScene" uid="uid://bv1l4n3rbgv53" path="res://game/challenges/ChallengeManager.tscn" id="3_b686c"]
 [ext_resource type="PackedScene" uid="uid://ci7lkqfsb37wk" path="res://assets/maskComponents/new/EYES_SAD.tscn" id="4_qf6n1"]
 [ext_resource type="PackedScene" uid="uid://dqb5huwrc4ohg" path="res://game/UI_FrontEnd/ui_front_end_node.tscn" id="5_dakft"]
 [ext_resource type="PackedScene" uid="uid://bk0qm484ny6gm" path="res://assets/levelCompononents/Room/Room.gltf" id="5_dxrkv"]
@@ -43,6 +44,8 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1350188789]
 environment = SubResource("Environment_dakft")
+
+[node name="ChallengeManager" parent="." unique_id=2007542354 instance=ExtResource("3_b686c")]
 
 [node name="GameSession" parent="." unique_id=247687767 node_paths=PackedStringArray("maskBuilder") instance=ExtResource("2_h7iqs")]
 maskBuilder = NodePath("../MaskConstructor")
