@@ -1,4 +1,4 @@
-extends Control
+class_name VibeCodedUI extends Control
 """
 UI Manager – handles shape selection, preview and confirmation.
 """
@@ -100,14 +100,16 @@ func _ready() -> void:
 	# 🔁 Selbst-Listener
 	self.mask_process_finished.connect(_on_mask_process_finished)
 
-	# Initiale Iteration
-	set_mask_text_for_iteration(SLOT_SEQUENCE[current_slot_index])
+	## Initiale Iteration
+	#set_mask_text_for_iteration(SLOT_SEQUENCE[current_slot_index])
 
+	
 	if color_picker:
 		color_picker.color_changed.connect(_on_color_changed)
 
 	if debug_apply_all_button:
 		debug_apply_all_button.pressed.connect(_on_debug_apply_all_pressed)
+	set_active(false)
 
 
 func _to_one_based(value: int) -> int:
@@ -470,3 +472,12 @@ func debug_apply_active_shape_to_all_buttons() -> void:
 
 	set_mesh_for_all_buttons(source_container)
 	
+
+func start() -> void:
+	set_active(true)
+	# Initiale Iteration
+	set_mask_text_for_iteration(SLOT_SEQUENCE[current_slot_index])
+
+
+func set_active(val:bool) -> void:
+	visible = val

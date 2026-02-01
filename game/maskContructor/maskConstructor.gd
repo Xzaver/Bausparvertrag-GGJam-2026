@@ -157,8 +157,7 @@ func GetEmotionShape(emotion : MaskComponent.EMOTIONS) -> PackedScene:
 
 func PlaceSceneToSlot(slot : MaskComponent.SLOT, objToInstantiate : PackedScene) -> Node3D:
 	
-	print("Place")
-	
+
 	var instantiatedComponent : Node3D = objToInstantiate.instantiate()
 	
 	maskRoot.add_child(instantiatedComponent)
@@ -252,5 +251,5 @@ func FinalizeConstruct(toDiscard:Dictionary):
 	toDiscard.clear()
 	
 	clearColors()
-	FinalizeMask.emit(currentMaskData)
 	clearBuilder()
+	FinalizeMask.emit(currentMaskData)

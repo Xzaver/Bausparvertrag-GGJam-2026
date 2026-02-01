@@ -4,7 +4,7 @@ var initialMask:MaskData
 
 func _init(storedMask : MaskData, slot : MaskComponent.SLOT) -> void:
 	brokenComp = slot
-	initialMask = storedMask
+	initialMask = storedMask.duplicate()
 	
 
 
