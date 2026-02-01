@@ -27,25 +27,111 @@ var currentMaskData :MaskData
 @export var top_ANGRY :PackedScene 
 @export var top_CUTE :PackedScene 
 
-@export var shape_SAD :PackedScene 
+@export var shape_SAD :PackedScene
+@export var shape_HAPPY :PackedScene 
+@export var shape_ANGRY :PackedScene 
+@export var shape_CUTE :PackedScene
 
 #--- Mask Pos
 
-var eyePos :Transform3D = eyePosRef.transform
-var mouthPos :Transform3D = mouthPosRef.transform
-var topPos :Transform3D = topPosRef.transform
-var shapePos :Transform3D = shapePosRef.transform
+@export var maskRoot : Node3D
 
+var eyePos :Vector3
+var mouthPos :Vector3
+var topPos :Vector3
+var shapePos :Vector3
 
 signal FinalizeMask(maskDataToSend:MaskData)
 
+func _ready() -> void:
+		
+	eyePos = eyePosRef.global_position
+	mouthPos = mouthPosRef.global_position
+	topPos = topPosRef.global_position
+	shapePos = shapePosRef.global_position
+
 func clearBuilder():
-	pass
+	
+	var childrenToKill : Array[Node] = maskRoot.get_children()
+	
+	for i in childrenToKill :
+		i.queue_free()
 
 func renderMask(maskData:MaskData):
-	print("Render Mask ")
 	
-	pass
+	clearBuilder()
+	
+	PlaceSceneToSlot(MaskComponent.SLOT.EYES, GetEmotionEyes(maskData.eyes))
+	PlaceSceneToSlot(MaskComponent.SLOT.MOUTH, GetEmotionMouth(maskData.mouth))
+	PlaceSceneToSlot(MaskComponent.SLOT.TOP, GetEmotionTop(maskData.top))
+	PlaceSceneToSlot(MaskComponent.SLOT.SHAPE, GetEmotionShape(maskData.shape))
+
+func GetEmotionEyes(emotion : MaskComponent.EMOTIONS) -> PackedScene:
+	match emotion:
+		MaskComponent.EMOTIONS.SAD:
+			return eye_SAD
+		MaskComponent.EMOTIONS.HAPPY:
+			return eye_HAPPY
+		MaskComponent.EMOTIONS.ANGRY:
+			return eye_ANGRY
+		MaskComponent.EMOTIONS.CUTE:
+			return eye_SAD
+	return null
+
+func GetEmotionMouth(emotion : MaskComponent.EMOTIONS) -> PackedScene:
+	match emotion:
+		MaskComponent.EMOTIONS.SAD:
+			return mouth_SAD
+		MaskComponent.EMOTIONS.HAPPY:
+			return mouth_HAPPY
+		MaskComponent.EMOTIONS.ANGRY:
+			return mouth_ANGRY
+		MaskComponent.EMOTIONS.CUTE:
+			return mouth_SAD
+	return null
+
+func GetEmotionTop(emotion : MaskComponent.EMOTIONS) -> PackedScene:
+	match emotion:
+		MaskComponent.EMOTIONS.SAD:
+			return top_SAD
+		MaskComponent.EMOTIONS.HAPPY:
+			return top_HAPPY
+		MaskComponent.EMOTIONS.ANGRY:
+			return top_ANGRY
+		MaskComponent.EMOTIONS.CUTE:
+			return top_SAD
+	return null
+
+func GetEmotionShape(emotion : MaskComponent.EMOTIONS) -> PackedScene:
+	match emotion:
+		MaskComponent.EMOTIONS.SAD:
+			return shape_SAD
+		MaskComponent.EMOTIONS.HAPPY:
+			return shape_HAPPY
+		MaskComponent.EMOTIONS.ANGRY:
+			return shape_ANGRY
+		MaskComponent.EMOTIONS.CUTE:
+			return shape_SAD
+	return null
+
+func PlaceSceneToSlot(slot : MaskComponent.SLOT, objToInstantiate : PackedScene) -> void:
+	
+	print("Place")
+	
+	var instantiatedComponent : Node3D = objToInstantiate.instantiate()
+	
+	maskRoot.add_child(instantiatedComponent)
+	
+	match slot:
+		MaskComponent.SLOT.EYES:
+			instantiatedComponent.global_position = eyePos
+		MaskComponent.SLOT.MOUTH:
+			instantiatedComponent.global_position = mouthPos
+		MaskComponent.SLOT.TOP:
+			instantiatedComponent.global_position = topPos
+		MaskComponent.SLOT.SHAPE:
+			instantiatedComponent.global_position = shapePos
+		
 
 func ReceiveMask(maskdatafrommanager:MaskData):
 	if maskdatafrommanager == null:

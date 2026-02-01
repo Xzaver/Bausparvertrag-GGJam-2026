@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-MaskResourceManager="*uid://deswofn2khbds"
+MaskResourceManager="*uid://cdcrnaw8b0s5"
 
 [display]
 
