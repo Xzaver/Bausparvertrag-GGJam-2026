@@ -7,9 +7,9 @@
 
 [node name="MaskComponent" type="Node3D" parent="." unique_id=1728862945 node_paths=PackedStringArray("colorizeableMeshes")]
 script = ExtResource("1_cwlcm")
-colorizeableMeshes = [NodePath("Happy_eyes2/Happy_eyes/Happy_eye")]
+colorizeableMeshes = [null]
 metadata/_custom_type_script = "uid://cshjpferrlj2n"
 
-[node name="Happy_eyes2" parent="MaskComponent" unique_id=1616459173 instance=ExtResource("2_b62af")]
+[node name="Happy_eyes2" parent="MaskComponent" unique_id=1316596280 instance=ExtResource("2_b62af")]
 
 [editable path="MaskComponent/Happy_eyes2"]

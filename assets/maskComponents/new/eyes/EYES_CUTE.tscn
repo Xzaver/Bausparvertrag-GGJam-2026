@@ -12,4 +12,13 @@ metadata/_custom_type_script = "uid://cshjpferrlj2n"
 
 [node name="Eyes_Cute" parent="MaskComponent" unique_id=720306823 instance=ExtResource("2_o2dxj")]
 
+[node name="Cute_eye_Hightlight_big" parent="MaskComponent/Eyes_Cute/Eyes_cute" parent_id_path=PackedInt32Array(720306823, 1409797881) index="0" unique_id=772599527]
+gi_mode = 2
+
+[node name="Cute_eye_Hightlight_smal" parent="MaskComponent/Eyes_Cute/Eyes_cute" parent_id_path=PackedInt32Array(720306823, 1409797881) index="1" unique_id=123737514]
+gi_mode = 2
+
+[node name="Cute_Eyes" parent="MaskComponent/Eyes_Cute/Eyes_cute" parent_id_path=PackedInt32Array(720306823, 1409797881) index="2" unique_id=1281930137]
+gi_mode = 2
+
 [editable path="MaskComponent/Eyes_Cute"]
