@@ -71,7 +71,7 @@ func _ready() -> void:
 	topPos = topPosRef.global_position
 	shapePos = shapePosRef.global_position
 	
-	updateMaskProperty(MaskComponent.SLOT.MOUTH,MaskComponent.EMOTIONS.SAD, Color(0,0,0))
+	#updateMaskProperty(MaskComponent.SLOT.MOUTH,MaskComponent.EMOTIONS.SAD, Color(0,0,0))
 
 func clearBuilder():
 	
