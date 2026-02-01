@@ -116,7 +116,7 @@ func GetEmotionEyes(emotion : MaskComponent.EMOTIONS) -> PackedScene:
 		MaskComponent.EMOTIONS.ANGRY:
 			return eye_ANGRY
 		MaskComponent.EMOTIONS.CUTE:
-			return eye_SAD
+			return eye_CUTE
 	return null
 
 func GetEmotionMouth(emotion : MaskComponent.EMOTIONS) -> PackedScene:
@@ -128,7 +128,7 @@ func GetEmotionMouth(emotion : MaskComponent.EMOTIONS) -> PackedScene:
 		MaskComponent.EMOTIONS.ANGRY:
 			return mouth_ANGRY
 		MaskComponent.EMOTIONS.CUTE:
-			return mouth_SAD
+			return mouth_CUTE
 	return null
 
 func GetEmotionTop(emotion : MaskComponent.EMOTIONS) -> PackedScene:
@@ -140,7 +140,7 @@ func GetEmotionTop(emotion : MaskComponent.EMOTIONS) -> PackedScene:
 		MaskComponent.EMOTIONS.ANGRY:
 			return top_ANGRY
 		MaskComponent.EMOTIONS.CUTE:
-			return top_SAD
+			return top_CUTE
 	return null
 
 func GetEmotionShape(emotion : MaskComponent.EMOTIONS) -> PackedScene:
@@ -152,7 +152,7 @@ func GetEmotionShape(emotion : MaskComponent.EMOTIONS) -> PackedScene:
 		MaskComponent.EMOTIONS.ANGRY:
 			return shape_ANGRY
 		MaskComponent.EMOTIONS.CUTE:
-			return shape_SAD
+			return shape_CUTE
 	return null
 
 func PlaceSceneToSlot(slot : MaskComponent.SLOT, objToInstantiate : PackedScene) -> Node3D:
