@@ -31,6 +31,12 @@ const EMOTION_LABELS := {
 # ==================================================
 const DEBUG_SIGNALS := true
 
+signal updateMaskProperty(
+	slot: MaskComponent.SLOT,
+	emotion: MaskComponent.EMOTIONS
+)
+
+
 signal mask_process_finished(selections: Dictionary)
 
 var mask_selections: Dictionary = {}
