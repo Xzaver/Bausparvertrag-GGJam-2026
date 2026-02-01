@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://5byptxpasfx8" path="res://assets/maskComponents/new/top/TOP_ANGRY.tscn" id="21_58yx1"]
 [ext_resource type="PackedScene" uid="uid://d2gy4h2xavbbm" path="res://assets/maskComponents/new/top/TOP_CUTE.tscn" id="22_hbvmx"]
 [ext_resource type="PackedScene" uid="uid://b0eta67emrci2" path="res://game/challenges/TextGenerator.tscn" id="29_58yx1"]
+[ext_resource type="JSON" path="res://assets/Dialog2.json" id="30_hbvmx"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_b686c"]
 panorama = ExtResource("2_vsp63")
@@ -114,8 +115,7 @@ environment = SubResource("Environment_dakft")
 
 [node name="ScoreKeeper" parent="." unique_id=680791359 instance=ExtResource("3_hb504")]
 
-[node name="ChallengeManager" parent="." unique_id=2007542354 node_paths=PackedStringArray("textGenerator") instance=ExtResource("3_b686c")]
-textGenerator = NodePath("../TextGenerator")
+[node name="ChallengeManager" parent="." unique_id=2007542354 instance=ExtResource("3_b686c")]
 
 [node name="GameSession" parent="." unique_id=247687767 node_paths=PackedStringArray("maskBuilder", "challengeManager", "scoreKeeper", "ui", "customerDoll") instance=ExtResource("2_h7iqs")]
 maskBuilder = NodePath("../MaskConstructor")
@@ -226,6 +226,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.227514, 1.0380096, 0.18708
 libraries/ = SubResource("AnimationLibrary_ln7ps")
 
 [node name="TextGenerator" parent="." unique_id=1622416483 instance=ExtResource("29_58yx1")]
+dialogue = ExtResource("30_hbvmx")
 
 [connection signal="mask_process_finished" from="UI_FrontEnd_Node" to="MaskConstructor" method="FinalizeConstruct"]
 [connection signal="mask_selection_changed" from="UI_FrontEnd_Node" to="MaskConstructor" method="updateMaskProperty"]

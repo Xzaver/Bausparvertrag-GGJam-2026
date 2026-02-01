@@ -7,7 +7,7 @@ var scheduler : Scheduler
 @export var scoreKeeper : ScoreKeeper
 @export var ui: VibeCodedUI
 @export var customerDoll : CustomerDoll
-
+@export var textGenerator : TextGenerator
 var debugEnabled : bool = false
 
 func _ready() -> void:
@@ -69,14 +69,16 @@ func onSessionStateChanged(newState : GameSession.GameState) -> void:
 			await customerDoll.animPlayer.animation_finished
 			ui.set_active(true)
 			var mask : MaskData = MaskResourceManager.fetch_mask(session.currentCustomer.maskID)
-			
+			var challenges : Array[Challenge] 
 			if mask != null:
 				mask = mask.duplicate()	
-				challengeManager.requestChallenge(mask,1) #challenge manager creates challenge
+				challenges = challengeManager.requestChallenge(mask,1) #challenge manager creates challenge
 			else:
 				mask = MaskData.RandomMask()
-				challengeManager.requestChallenge(mask,1, true)
+				challenges = challengeManager.requestChallenge(mask,1, true)
 			
+			
+			textGenerator.displayChallengeDialogue(session.currentCustomer,challenges )
 			#if debug enabled we automatically create random mask and go to next state
 			if debugEnabled == true:
 				
