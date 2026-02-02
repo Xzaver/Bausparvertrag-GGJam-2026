@@ -220,11 +220,12 @@ func _apply_color(
 	meshes: Array[MeshInstance3D],
 	color: Color
 ) -> void:
-	if meshes.is_empty():
+	if meshes[0] == null:
+		print("tripped")
 		return
 	if color == null:
 		return
-	
+	print(meshes)
 	var mat := meshes[0].get_surface_override_material(0)
 	if mat == null:
 		mat = StandardMaterial3D.new()
